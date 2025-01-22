@@ -66,7 +66,7 @@ const Register = () => {
       role: "donor",
     };
 
-    const userRes = await axiosPublic.post("/user", userInfo);
+    const userRes = await axiosPublic.post("/users", userInfo);
     console.log(userRes.data);
 
     const updateInfo = { displayName: name, photoURL: photoURL };
