@@ -5,6 +5,7 @@ import Home from "../layouts/pages/Home/Home";
 import Login from "../layouts/Login";
 import Register from "../layouts/Register";
 import Dashboard from "../layouts/Dashboard/Dashboard";
+import Search from "../layouts/pages/Search/Search";
 
 const router = createBrowserRouter([
   {
@@ -15,6 +16,10 @@ const router = createBrowserRouter([
       {
         path: "/",
         element: <Home />,
+      },
+      {
+        path: "/search",
+        element: <Search />,
       },
       {
         path: "/login",

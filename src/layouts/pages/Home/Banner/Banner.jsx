@@ -15,12 +15,12 @@ const Banner = () => {
               fullest.
             </p>
             <div className="flex items-center gap-4">
-              <Link>
+              <Link to={"/register"}>
                 <button className="btn bg-primary text-white border-none">
                   Join as a Donor
                 </button>
               </Link>
-              <Link>
+              <Link to={"/search"}>
                 <button className="btn bg-white text-primary border-none">
                   Search Donors
                 </button>

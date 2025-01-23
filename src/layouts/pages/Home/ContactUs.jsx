@@ -8,7 +8,7 @@ const ContactUs = () => {
         Contact Us
       </h2>
       <div className="lg:flex items-center gap-40">
-        <div className="bg-red-200 p-10 shadow-2xl rounded-xl flex flex-col gap-4 m-4">
+        <div className="bg-red-200 p-10 shadow-lg rounded-xl flex flex-col gap-4 m-4">
           <div className="flex items-center gap-2">
             <div className="text-2xl bg-white rounded-full p-3">
               <FaHome />
@@ -39,7 +39,7 @@ const ContactUs = () => {
             </div>
           </div>
         </div>
-        <form className="space-y-4 flex-1 bg-base-200 p-10 rounded-lg">
+        <form className="space-y-4 flex-1 bg-base-200 p-10 rounded-lg shadow-lg">
           <h2 className="text-2xl font-bold">Send Message</h2>
           <div className="lg:flex items-center gap-4">
             <label className="form-control w-full">
