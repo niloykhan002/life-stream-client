@@ -59,7 +59,7 @@ const Navbar = () => {
             </div>
             <ul
               tabIndex={0}
-              className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow"
+              className="menu menu-sm dropdown-content bg-black rounded-box z-[1] mt-3 w-40 p-2 shadow"
             >
               {link}
             </ul>
@@ -88,7 +88,7 @@ const Navbar = () => {
                 />
                 <ul
                   tabIndex={0}
-                  className="dropdown-content menu bg-base-100 rounded-box z-[1] w-52 p-2 shadow"
+                  className="dropdown-content menu bg-black rounded-box z-[1] w-52 p-2 shadow"
                 >
                   <li>
                     <NavLink
@@ -101,7 +101,7 @@ const Navbar = () => {
                   <li>
                     <button
                       onClick={handleSignOut}
-                      className="btn border-none btn-sm md:h-12 bg-primary text-white md:w-24"
+                      className="btn border-none btn-sm  bg-primary text-white md:w-24"
                     >
                       LogOut
                     </button>
@@ -110,7 +110,7 @@ const Navbar = () => {
               </div>
             </div>
           ) : (
-            <div className="md:space-x-4 flex items-center">
+            <div className="md:space-x-4 space-x-1 flex items-center">
               <Link to={"/login"}>
                 <button className="btn border-none btn-xs md:h-12 bg-primary text-white md:w-24">
                   Login

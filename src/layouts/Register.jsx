@@ -46,13 +46,30 @@ const Register = () => {
 
     let formData = new FormData(e.target);
     const formValues = Object.fromEntries(formData.entries());
-    const image = formValues.image;
+    const image = { image: formValues.image };
     const name = formValues.name;
     const password = formValues.password;
     const confirm_password = formValues.confirm_password;
     const email = formValues.email;
 
-    const res = await axiosPublic.post(image_hosting_api, image);
+    if (password !== confirm_password) {
+      return toast.error("Please ensure both passwords are the same");
+    }
+    if (password.length < 6) {
+      return toast.error("Length must be at least 6 character ");
+    }
+    if (!/[A-Z]/.test(password)) {
+      return toast.error("Must have an Uppercase letter in the password");
+    }
+    if (!/[a-z]/.test(password)) {
+      return toast.error("Must have a Lowercase letter in the password");
+    }
+
+    const res = await axiosPublic.post(image_hosting_api, image, {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    });
     const photoURL = res.data.data.display_url;
 
     const userInfo = {
@@ -70,19 +87,6 @@ const Register = () => {
     console.log(userRes.data);
 
     const updateInfo = { displayName: name, photoURL: photoURL };
-
-    if (password !== confirm_password) {
-      return toast.error("Please ensure both passwords are the same");
-    }
-    if (password.length < 6) {
-      return toast.error("Length must be at least 6 character ");
-    }
-    if (!/[A-Z]/.test(password)) {
-      return toast.error("Must have an Uppercase letter in the password");
-    }
-    if (!/[a-z]/.test(password)) {
-      return toast.error("Must have a Lowercase letter in the password");
-    }
 
     createUser(email, password)
       .then((result) => {
@@ -103,11 +107,11 @@ const Register = () => {
   return (
     <div className="flex items-center justify-center mt-32 mb-20">
       <Toaster />
-      <div className="lg:flex flex-row-reverse items-center gap-6  shadow-lg rounded-2xl bg-red-200">
-        <div className="md:w-[600px] w-80 mx-10">
+      <div className="lg:flex flex-row-reverse items-center gap-6 shadow-lg rounded-2xl bg-red-200">
+        <div className="md:w-[600px] w-80 lg:mx-8">
           <Lottie animationData={registerLottie} />
         </div>
-        <div className="card w-full max-w-md shrink-0 rounded-none border-r-2 border-white">
+        <div className="card w-full lg:max-w-md shrink-0 rounded-none lg:border-r-2 border-white">
           <h1 className="font-bold text-4xl text-center pt-8 text-primary ">
             Register
           </h1>

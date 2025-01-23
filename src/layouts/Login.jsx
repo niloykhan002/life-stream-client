@@ -25,13 +25,13 @@ const Login = () => {
   };
 
   return (
-    <div className="flex items-center justify-center my-20">
+    <div className="flex items-center justify-center mt-32 mb-20">
       <Toaster />
       <div className="lg:flex flex-row-reverse items-center gap-6 shadow-lg rounded-2xl bg-red-200">
-        <div className="md:w-[500px] w-80 mx-8">
+        <div className="md:w-[500px] w-96 md:mx-8">
           <Lottie animationData={loginLottie} />
         </div>
-        <div className="card  w-full max-w-md shrink-0 rounded-none border-r-2 border-white">
+        <div className="card  w-full lg:max-w-md shrink-0 rounded-none lg:border-r-2 border-white">
           <h1 className="font-bold text-4xl text-center pt-8 text-primary">
             Login
           </h1>
