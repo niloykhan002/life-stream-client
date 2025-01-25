@@ -9,10 +9,12 @@ import {
 } from "firebase/auth";
 import auth from "../firebase/firebase.config";
 import PropTypes from "prop-types";
+import useAxiosPublic from "../hooks/useAxiosPublic";
 
 const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
+  const axiosPublic = useAxiosPublic();
 
   const createUser = (email, password) => {
     return createUserWithEmailAndPassword(auth, email, password);
@@ -30,35 +32,23 @@ const AuthProvider = ({ children }) => {
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser);
-      setLoading(false);
-      // if (currentUser) {
-      //   const user = { email: currentUser.email };
-
-      //   axios
-      //     .post("https://study-circle-server-five.vercel.app/jwt", user, {
-      //       withCredentials: true,
-      //     })
-      //     .then((res) => {
-      //       console.log(res.data);
-      //       setLoading(false);
-      //     });
-      // } else {
-      //   axios
-      //     .post(
-      //       "https://study-circle-server-five.vercel.app/logout",
-      //       {},
-      //       { withCredentials: true }
-      //     )
-      //     .then((res) => {
-      //       console.log(res.data);
-      //       setLoading(false);
-      //     });
-      // }
+      if (currentUser) {
+        const userInfo = { email: currentUser.email };
+        axiosPublic.post("/jwt", userInfo).then((res) => {
+          if (res.data.token) {
+            localStorage.setItem("access-token", res.data.token);
+            setLoading(false);
+          }
+        });
+      } else {
+        localStorage.removeItem("access-token");
+        setLoading(false);
+      }
     });
     return () => {
       unsubscribe();
     };
-  }, []);
+  }, [axiosPublic]);
   const authInfo = {
     createUser,
     updateUser,

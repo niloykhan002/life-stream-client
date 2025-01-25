@@ -92,7 +92,7 @@ const Navbar = () => {
                 >
                   <li>
                     <NavLink
-                      to={"/dashboard"}
+                      to={"/dashboard/profile"}
                       className={({ isActive }) => (isActive ? "active" : "")}
                     >
                       Dashboard

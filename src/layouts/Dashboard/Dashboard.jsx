@@ -1,4 +1,4 @@
-import { FaUserCircle } from "react-icons/fa";
+import { FaHome, FaUserCircle } from "react-icons/fa";
 import { IoMenu } from "react-icons/io5";
 import { NavLink, Outlet } from "react-router-dom";
 
@@ -42,7 +42,12 @@ const Dashboard = () => {
                   </NavLink>
                 </li>
                 <li>
-                  <a>Sidebar Item 2</a>
+                  <NavLink
+                    to={"/dashboard/donorHome"}
+                    className={"uppercase font-semibold"}
+                  >
+                    <FaHome className="text-xl" /> Donor Home
+                  </NavLink>
                 </li>
               </ul>
             </div>
