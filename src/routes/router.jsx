@@ -6,6 +6,8 @@ import Login from "../layouts/Login";
 import Register from "../layouts/Register";
 import Dashboard from "../layouts/Dashboard/Dashboard";
 import Search from "../layouts/pages/Search/Search";
+import PrivateRoute from "./PrivateRoute";
+import ProfilePage from "../layouts/Dashboard/ProfilePage";
 
 const router = createBrowserRouter([
   {
@@ -33,8 +35,17 @@ const router = createBrowserRouter([
   },
   {
     path: "dashboard",
-    element: <Dashboard />,
-    children: [],
+    element: (
+      <PrivateRoute>
+        <Dashboard />
+      </PrivateRoute>
+    ),
+    children: [
+      {
+        path: "profile",
+        element: <ProfilePage />,
+      },
+    ],
   },
 ]);
 

@@ -118,18 +118,6 @@ const Register = () => {
           <form onSubmit={handleRegister} className="card-body">
             <div className="form-control">
               <label className="label">
-                <span className="label-text">Email</span>
-              </label>
-              <input
-                type="email"
-                name="email"
-                placeholder="Enter Your Email"
-                className="input input-bordered"
-                required
-              />
-            </div>
-            <div className="form-control">
-              <label className="label">
                 <span className="label-text">Name</span>
               </label>
               <input
@@ -140,6 +128,19 @@ const Register = () => {
                 required
               />
             </div>
+            <div className="form-control">
+              <label className="label">
+                <span className="label-text">Email</span>
+              </label>
+              <input
+                type="email"
+                name="email"
+                placeholder="Enter Your Email"
+                className="input input-bordered"
+                required
+              />
+            </div>
+
             <div className="form-control">
               <label className="label">
                 <span className="label-text">Image</span>
