@@ -3,8 +3,10 @@ import useAuth from "../hooks/useAuth";
 import { Link, useNavigate } from "react-router-dom";
 import Lottie from "lottie-react";
 import registerLottie from "../assets/lottie/register.json";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import useAxiosPublic from "../hooks/useAxiosPublic";
+import useGetDistricts from "../hooks/useGetDistricts";
+import useGetUpazila from "../hooks/useGetUpazila";
 
 const image_hosting_key = import.meta.env.VITE_IMAGE_HOSTING_KEY;
 const image_hosting_api = `https://api.imgbb.com/1/upload?key=${image_hosting_key}`;
@@ -13,33 +15,9 @@ const Register = () => {
   const axiosPublic = useAxiosPublic();
   const { createUser, updateUser } = useAuth();
   const navigate = useNavigate();
-  const [districts, setDistricts] = useState([]);
-  const [selected, setSelected] = useState("1");
-  const [upazila, setUpazila] = useState([]);
-
-  useEffect(() => {
-    fetch("/district.json")
-      .then((res) => res.json())
-      .then((data) => setDistricts(data));
-  }, []);
-  useEffect(() => {
-    fetch("/upazila.json")
-      .then((res) => res.json())
-      .then((data) => {
-        const selectedUpazila = data.filter(
-          (item) => item.district_id === selected
-        );
-        setUpazila(selectedUpazila);
-      });
-  }, [selected]);
-
-  const handleChange = (e) => {
-    const districtName = e.target.value;
-    const district = districts.find(
-      (district) => district.name === districtName
-    );
-    setSelected(district.id);
-  };
+  const [districts] = useGetDistricts();
+  const [selected, setSelected] = useState();
+  const [upazila] = useGetUpazila(selected);
 
   const handleRegister = async (e) => {
     e.preventDefault();
@@ -172,7 +150,7 @@ const Register = () => {
                 <span className="label-text">District</span>
               </label>
               <select
-                onChange={handleChange}
+                onChange={(e) => setSelected(e.target.value)}
                 className="select select-bordered w-full"
                 name="district"
               >

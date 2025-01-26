@@ -1,36 +1,14 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import useAxiosPublic from "../../../hooks/useAxiosPublic";
+import useGetDistricts from "../../../hooks/useGetDistricts";
+import useGetUpazila from "../../../hooks/useGetUpazila";
 
 const Search = () => {
   const axiosPublic = useAxiosPublic();
-  const [districts, setDistricts] = useState([]);
-  const [selected, setSelected] = useState("1");
-  const [upazila, setUpazila] = useState([]);
+  const [districts] = useGetDistricts();
+  const [selected, setSelected] = useState();
+  const [upazila] = useGetUpazila(selected);
   const [donors, setDonors] = useState([]);
-
-  useEffect(() => {
-    fetch("/district.json")
-      .then((res) => res.json())
-      .then((data) => setDistricts(data));
-  }, []);
-  useEffect(() => {
-    fetch("/upazila.json")
-      .then((res) => res.json())
-      .then((data) => {
-        const selectedUpazila = data.filter(
-          (item) => item.district_id === selected
-        );
-        setUpazila(selectedUpazila);
-      });
-  }, [selected]);
-
-  const handleChange = (e) => {
-    const districtName = e.target.value;
-    const district = districts.find(
-      (district) => district.name === districtName
-    );
-    setSelected(district.id);
-  };
 
   const handleSearch = (e) => {
     e.preventDefault();
@@ -38,7 +16,7 @@ const Search = () => {
     const formValues = Object.fromEntries(formData.entries());
 
     axiosPublic
-      .get("/users", {
+      .get("/users/donors", {
         params: formValues,
       })
       .then((res) => setDonors(res.data));
@@ -70,7 +48,7 @@ const Search = () => {
               <span className="label-text">District</span>
             </label>
             <select
-              onChange={handleChange}
+              onChange={(e) => setSelected(e.target.value)}
               className="select select-bordered w-full"
               name="district"
             >

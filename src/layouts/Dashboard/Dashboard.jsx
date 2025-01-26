@@ -1,5 +1,7 @@
 import { FaHome, FaUserCircle } from "react-icons/fa";
+import { IoIosCreate } from "react-icons/io";
 import { IoMenu } from "react-icons/io5";
+import { MdBloodtype } from "react-icons/md";
 import { NavLink, Outlet } from "react-router-dom";
 
 const Dashboard = () => {
@@ -47,6 +49,22 @@ const Dashboard = () => {
                     className={"uppercase font-semibold"}
                   >
                     <FaHome className="text-xl" /> Donor Home
+                  </NavLink>
+                </li>
+                <li>
+                  <NavLink
+                    to={"/dashboard/my-donation-requests"}
+                    className={"uppercase font-semibold"}
+                  >
+                    <MdBloodtype className="text-xl" /> My Donation Requests
+                  </NavLink>
+                </li>
+                <li>
+                  <NavLink
+                    to={"/dashboard/create-donation-request"}
+                    className={"uppercase font-semibold"}
+                  >
+                    <IoIosCreate className="text-xl" /> Create Donation Request
                   </NavLink>
                 </li>
               </ul>

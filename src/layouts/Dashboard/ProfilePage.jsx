@@ -1,10 +1,12 @@
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import useAuth from "../../hooks/useAuth";
 import { MdCancel, MdEdit } from "react-icons/md";
 import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 import { FaCamera } from "react-icons/fa";
 import toast, { Toaster } from "react-hot-toast";
+import useGetDistricts from "../../hooks/useGetDistricts";
+import useGetUpazila from "../../hooks/useGetUpazila";
 
 const image_hosting_key = import.meta.env.VITE_IMAGE_HOSTING_KEY;
 const image_hosting_api = `https://api.imgbb.com/1/upload?key=${image_hosting_key}`;
@@ -12,35 +14,11 @@ const image_hosting_api = `https://api.imgbb.com/1/upload?key=${image_hosting_ke
 const ProfilePage = () => {
   const { user } = useAuth();
   const axiosSecure = useAxiosSecure();
-  const [districts, setDistricts] = useState([]);
-  const [selected, setSelected] = useState("1");
-  const [upazila, setUpazila] = useState([]);
+  const [districts] = useGetDistricts();
+  const [selected, setSelected] = useState();
+  const [upazila] = useGetUpazila(selected);
   const [edit, setEdit] = useState(false);
   const fileInputRef = useRef(null);
-
-  useEffect(() => {
-    fetch("/district.json")
-      .then((res) => res.json())
-      .then((data) => setDistricts(data));
-  }, []);
-  useEffect(() => {
-    fetch("/upazila.json")
-      .then((res) => res.json())
-      .then((data) => {
-        const selectedUpazila = data.filter(
-          (item) => item.district_id === selected
-        );
-        setUpazila(selectedUpazila);
-      });
-  }, [selected]);
-
-  const handleChange = (e) => {
-    const districtName = e.target.value;
-    const district = districts.find(
-      (district) => district.name === districtName
-    );
-    setSelected(district.id);
-  };
 
   const {
     refetch,
@@ -187,7 +165,7 @@ const ProfilePage = () => {
             <span className="label-text">District</span>
           </label>
           <select
-            onChange={handleChange}
+            onChange={(e) => setSelected(e.target.value)}
             className="select select-bordered w-full"
             name="district"
             disabled={!edit}
