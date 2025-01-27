@@ -67,6 +67,15 @@ const Dashboard = () => {
                     <IoIosCreate className="text-xl" /> Create Donation Request
                   </NavLink>
                 </li>
+                {/* admin nav */}
+                <li>
+                  <NavLink
+                    to={"/dashboard/adminHome"}
+                    className={"uppercase font-semibold"}
+                  >
+                    <FaHome className="text-xl" /> Admin Home
+                  </NavLink>
+                </li>
               </ul>
             </div>
           </div>

@@ -1,6 +1,5 @@
 import DatePicker from "react-datepicker";
 import toast, { Toaster } from "react-hot-toast";
-import useAuth from "../../../hooks/useAuth";
 import useGetDistricts from "../../../hooks/useGetDistricts";
 import { useState } from "react";
 import useGetUpazila from "../../../hooks/useGetUpazila";

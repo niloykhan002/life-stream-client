@@ -12,6 +12,8 @@ import DonorHome from "../layouts/Dashboard/Donor/DonorHome";
 import MyDonationRequests from "../layouts/Dashboard/Donor/MyDonationRequests";
 import CreateDonationRequest from "../layouts/Dashboard/Donor/CreateDonationRequest";
 import UpdateDonations from "../layouts/Dashboard/Donor/UpdateDonations";
+import AdminHome from "../layouts/Dashboard/Admin/AdminHome";
+import AdminRoute from "./AdminRoute";
 
 const router = createBrowserRouter([
   {
@@ -64,6 +66,15 @@ const router = createBrowserRouter([
       {
         path: "donations/:id",
         element: <UpdateDonations />,
+      },
+      // admin routes
+      {
+        path: "adminHome",
+        element: (
+          <AdminRoute>
+            <AdminHome />
+          </AdminRoute>
+        ),
       },
     ],
   },
