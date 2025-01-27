@@ -14,6 +14,7 @@ import CreateDonationRequest from "../layouts/Dashboard/Donor/CreateDonationRequ
 import UpdateDonations from "../layouts/Dashboard/Donor/UpdateDonations";
 import AdminHome from "../layouts/Dashboard/Admin/AdminHome";
 import AdminRoute from "./AdminRoute";
+import AllUsers from "../layouts/Dashboard/Admin/AllUsers";
 
 const router = createBrowserRouter([
   {
@@ -73,6 +74,14 @@ const router = createBrowserRouter([
         element: (
           <AdminRoute>
             <AdminHome />
+          </AdminRoute>
+        ),
+      },
+      {
+        path: "all-users",
+        element: (
+          <AdminRoute>
+            <AllUsers />
           </AdminRoute>
         ),
       },

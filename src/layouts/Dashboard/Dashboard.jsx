@@ -1,4 +1,4 @@
-import { FaHome, FaUserCircle } from "react-icons/fa";
+import { FaHome, FaUser, FaUserCircle } from "react-icons/fa";
 import { IoIosCreate } from "react-icons/io";
 import { IoMenu } from "react-icons/io5";
 import { MdBloodtype } from "react-icons/md";
@@ -74,6 +74,14 @@ const Dashboard = () => {
                     className={"uppercase font-semibold"}
                   >
                     <FaHome className="text-xl" /> Admin Home
+                  </NavLink>
+                </li>
+                <li>
+                  <NavLink
+                    to={"/dashboard/all-users"}
+                    className={"uppercase font-semibold"}
+                  >
+                    <FaUser className="text-xl" /> All Users
                   </NavLink>
                 </li>
               </ul>
