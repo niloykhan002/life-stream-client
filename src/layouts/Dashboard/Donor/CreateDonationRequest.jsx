@@ -6,6 +6,7 @@ import "react-datepicker/dist/react-datepicker.css";
 import DatePicker from "react-datepicker";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import toast, { Toaster } from "react-hot-toast";
+import { useQuery } from "@tanstack/react-query";
 
 const CreateDonationRequest = () => {
   const { user } = useAuth();
@@ -15,15 +16,33 @@ const CreateDonationRequest = () => {
   const [time, setTime] = useState(new Date());
   const axiosSecure = useAxiosSecure();
 
+  const { data: info = {}, isLoading } = useQuery({
+    queryKey: ["user", user?.email],
+    queryFn: async () => {
+      const res = await axiosSecure.get("/user", {
+        params: { email: user?.email },
+      });
+      return res.data;
+    },
+  });
+  if (isLoading) {
+    return <p>Loading...</p>;
+  }
+
   const handleCreate = (e) => {
     e.preventDefault();
     let formData = new FormData(e.target);
     const formValues = Object.fromEntries(formData.entries());
     formValues.donation_status = "pending";
 
+    if (info.status !== "active") {
+      return toast.error("You cannot create donation request");
+    }
+
     axiosSecure.post("/donations", formValues).then((res) => {
       console.log(res.data);
       toast.success("Donation request created successfully");
+      e.target.reset();
     });
   };
 
