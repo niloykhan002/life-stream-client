@@ -2,6 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import useAuth from "../../../hooks/useAuth";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import { Link } from "react-router-dom";
+import Swal from "sweetalert2";
 
 const DonorHome = () => {
   const axiosSecure = useAxiosSecure();
@@ -20,6 +21,39 @@ const DonorHome = () => {
       return res.data;
     },
   });
+
+  const handleDelete = (id, email) => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        if (user.email !== email) {
+          return Swal.fire({
+            title: "Error!",
+            text: "You Cannot Delete This!",
+            icon: "error",
+          });
+        }
+        axiosSecure.delete(`/donations/${id}`).then((res) => {
+          console.log(res.data);
+          if (res.data.deletedCount > 0) {
+            Swal.fire({
+              title: "Deleted!",
+              text: "Your donation request has been deleted.",
+              icon: "success",
+            });
+            refetch();
+          }
+        });
+      }
+    });
+  };
 
   const handleDone = (id) => {
     const updateInfo = { donation_status: "done" };
@@ -107,15 +141,15 @@ const DonorHome = () => {
                   <div className="flex items-center  gap-1">
                     <div className="flex items-center gap-1">
                       <Link
-                        to={`/donations/${donation._id}`}
+                        to={`/dashboard/donations/${donation._id}`}
                         className="btn btn-neutral btn-xs"
                       >
                         Edit
                       </Link>
                       <button
-                        // onClick={() =>
-                        //   handleDelete(assignment._id, assignment.email)
-                        // }
+                        onClick={() =>
+                          handleDelete(donation._id, donation.requester_email)
+                        }
                         className="btn bg-primary text-white btn-xs"
                       >
                         Delete
