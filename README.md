@@ -1,8 +1,21 @@
-# React + Vite
+# Life Stream
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This website is for online group study with friends. Users can create assignments, complete them, and grade their friends' assignments.
 
-Currently, two official plugins are available:
+Live link: https://life-stream-4c273.web.app/
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Key Features
+
+- Firebase Authentication
+- Lottie Files Animation
+- Responsiveness
+- Easy Routing
+- User Validation
+
+## Npm Packages
+
+- react-datepicker
+- react-tooltip
+- sweet-alert2
+- react-hot-toast
+- lottie-react
