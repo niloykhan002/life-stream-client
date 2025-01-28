@@ -20,6 +20,9 @@ import DonationRequests from "../layouts/pages/DonationRequests/DonationRequests
 import DonationDetails from "../layouts/pages/DonationDetails";
 import ContentManagement from "../layouts/Dashboard/Admin/ContentManagement";
 import AddBlog from "../layouts/Dashboard/Admin/AddBlog";
+import VolunteerHome from "../layouts/Dashboard/Volunteer/VolunteerHome";
+import VolunteerRoute from "./VolunteerRoute";
+import AllBloodDonationRequests from "../layouts/Dashboard/Volunteer/AllBloodDonationRequests";
 
 const router = createBrowserRouter([
   {
@@ -124,6 +127,23 @@ const router = createBrowserRouter([
           <AdminRoute>
             <AddBlog />
           </AdminRoute>
+        ),
+      },
+      // volunteer route
+      {
+        path: "volunteerHome",
+        element: (
+          <VolunteerRoute>
+            <VolunteerHome />
+          </VolunteerRoute>
+        ),
+      },
+      {
+        path: "all-donation-request",
+        element: (
+          <VolunteerRoute>
+            <AllBloodDonationRequests />
+          </VolunteerRoute>
         ),
       },
     ],

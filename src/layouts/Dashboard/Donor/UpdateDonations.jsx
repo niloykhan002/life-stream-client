@@ -40,7 +40,7 @@ const UpdateDonations = () => {
     axiosSecure.put(`/donations/${info._id}`, formValues).then((res) => {
       console.log(res.data);
       if (res.data.modifiedCount > 0) {
-        return toast.success("Donation request created successfully");
+        return toast.success("Donation request updated successfully");
       }
     });
   };

@@ -100,6 +100,24 @@ const Dashboard = () => {
                     <MdContentCopy className="text-xl" /> Content Management
                   </NavLink>
                 </li>
+                {/* Volunteer nav */}
+                <li>
+                  <NavLink
+                    to={"/dashboard/volunteerHome"}
+                    className={"uppercase font-semibold"}
+                  >
+                    <FaHome className="text-xl" /> Volunteer Home
+                  </NavLink>
+                </li>
+                <li>
+                  <NavLink
+                    to={"/dashboard/all-donation-request"}
+                    className={"uppercase font-semibold"}
+                  >
+                    <MdBloodtype className="text-xl" /> All Blood Donation
+                    Request
+                  </NavLink>
+                </li>
               </ul>
             </div>
           </div>
