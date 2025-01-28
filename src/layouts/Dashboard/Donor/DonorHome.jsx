@@ -91,7 +91,7 @@ const DonorHome = () => {
               <th>Donation Time</th>
               <th>Blood Group</th>
               <th>Donation Status</th>
-              <th>Donation Information</th>
+              <th>Donor Information</th>
               <th className="md:text-center">Action</th>
             </tr>
           </thead>
@@ -156,7 +156,7 @@ const DonorHome = () => {
                       </button>
                     </div>
                     <Link
-                      to={`/donations-details/${donation._id}`}
+                      to={`/donation-details/${donation._id}`}
                       className="btn btn-neutral btn-xs"
                     >
                       View

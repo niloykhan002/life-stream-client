@@ -101,7 +101,7 @@ const AllDonationRequests = () => {
               <th>Donation Time</th>
               <th>Blood Group</th>
               <th>Donation Status</th>
-              <th>Donation Information</th>
+              <th>Donor Information</th>
               <th className="md:text-center">Action</th>
             </tr>
           </thead>

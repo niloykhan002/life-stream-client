@@ -1,7 +1,7 @@
 import { FaHome, FaUser, FaUserCircle } from "react-icons/fa";
 import { IoIosCreate } from "react-icons/io";
 import { IoMenu } from "react-icons/io5";
-import { MdBloodtype } from "react-icons/md";
+import { MdBloodtype, MdContentCopy } from "react-icons/md";
 import { NavLink, Outlet } from "react-router-dom";
 
 const Dashboard = () => {
@@ -90,6 +90,14 @@ const Dashboard = () => {
                     className={"uppercase font-semibold"}
                   >
                     <MdBloodtype className="text-xl" /> All Donation Request
+                  </NavLink>
+                </li>
+                <li>
+                  <NavLink
+                    to={"/dashboard/content-management"}
+                    className={"uppercase font-semibold"}
+                  >
+                    <MdContentCopy className="text-xl" /> Content Management
                   </NavLink>
                 </li>
               </ul>

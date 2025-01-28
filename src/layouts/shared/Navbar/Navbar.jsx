@@ -16,7 +16,7 @@ const Navbar = () => {
       </li>
       <li>
         <NavLink
-          to={"/assignments"}
+          to={"/donation-requests"}
           className={({ isActive }) => (isActive ? "active" : "")}
         >
           Donation Requests

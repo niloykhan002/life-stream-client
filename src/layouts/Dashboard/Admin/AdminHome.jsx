@@ -20,7 +20,9 @@ const AdminHome = () => {
   const { data: donationRequests = [] } = useQuery({
     queryKey: ["donationRequests"],
     queryFn: async () => {
-      const res = await axiosSecure.get("/all-donations");
+      const res = await axiosSecure.get("/all-donations", {
+        params: { status: "all" },
+      });
       return res.data;
     },
   });

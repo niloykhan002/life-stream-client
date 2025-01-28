@@ -16,6 +16,9 @@ import AdminHome from "../layouts/Dashboard/Admin/AdminHome";
 import AdminRoute from "./AdminRoute";
 import AllUsers from "../layouts/Dashboard/Admin/AllUsers";
 import AllDonationRequests from "../layouts/Dashboard/Admin/AllDonationRequests";
+import DonationRequests from "../layouts/pages/DonationRequests/DonationRequests";
+import DonationDetails from "../layouts/pages/DonationDetails";
+import ContentManagement from "../layouts/Dashboard/Admin/ContentManagement";
 
 const router = createBrowserRouter([
   {
@@ -30,6 +33,18 @@ const router = createBrowserRouter([
       {
         path: "/search",
         element: <Search />,
+      },
+      {
+        path: "/donation-requests",
+        element: <DonationRequests />,
+      },
+      {
+        path: "donation-details/:id",
+        element: (
+          <PrivateRoute>
+            <DonationDetails />
+          </PrivateRoute>
+        ),
       },
       {
         path: "/login",
@@ -91,6 +106,14 @@ const router = createBrowserRouter([
         element: (
           <AdminRoute>
             <AllDonationRequests />
+          </AdminRoute>
+        ),
+      },
+      {
+        path: "content-management",
+        element: (
+          <AdminRoute>
+            <ContentManagement />
           </AdminRoute>
         ),
       },
