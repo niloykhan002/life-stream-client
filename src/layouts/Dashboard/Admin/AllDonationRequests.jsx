@@ -1,30 +1,28 @@
-import { Link } from "react-router-dom";
-import useAxiosSecure from "../../../hooks/useAxiosSecure";
-import useAuth from "../../../hooks/useAuth";
 import { useQuery } from "@tanstack/react-query";
-import { useState } from "react";
+import useAxiosSecure from "../../../hooks/useAxiosSecure";
+import { Link } from "react-router-dom";
 import Swal from "sweetalert2";
+import { useState } from "react";
 
-const MyDonationRequests = () => {
+const AllDonationRequests = () => {
   const axiosSecure = useAxiosSecure();
-  const { user } = useAuth();
   const [status, setStatus] = useState("all");
 
   const {
-    refetch,
     data: donations = [],
+    refetch,
     isLoading,
   } = useQuery({
-    queryKey: ["donations", user?.email, status],
+    queryKey: ["donations", status],
     queryFn: async () => {
-      const res = await axiosSecure.get("/donations", {
-        params: { email: user?.email, status: status },
+      const res = await axiosSecure.get("/all-donations", {
+        params: { status: status },
       });
       return res.data;
     },
   });
 
-  const handleDelete = (id, email) => {
+  const handleDelete = (id) => {
     Swal.fire({
       title: "Are you sure?",
       text: "You won't be able to revert this!",
@@ -35,13 +33,6 @@ const MyDonationRequests = () => {
       confirmButtonText: "Yes, delete it!",
     }).then((result) => {
       if (result.isConfirmed) {
-        if (user.email !== email) {
-          return Swal.fire({
-            title: "Error!",
-            text: "You Cannot Delete This!",
-            icon: "error",
-          });
-        }
         axiosSecure.delete(`/donations/${id}`).then((res) => {
           console.log(res.data);
           if (res.data.deletedCount > 0) {
@@ -149,7 +140,8 @@ const MyDonationRequests = () => {
                 <td>
                   {donation.donation_status === "inprogress" ? (
                     <div className="flex flex-col text-xs">
-                      <p>Name: {user.displayName}</p> <p>Email: {user.email}</p>
+                      <p>Name: {donation.requester_name}</p>{" "}
+                      <p>Email: {donation.requester_email}</p>
                     </div>
                   ) : (
                     "None"
@@ -166,16 +158,14 @@ const MyDonationRequests = () => {
                         Edit
                       </Link>
                       <button
-                        onClick={() =>
-                          handleDelete(donation._id, donation.requester_email)
-                        }
+                        onClick={() => handleDelete(donation._id)}
                         className="btn bg-primary text-white btn-xs"
                       >
                         Delete
                       </button>
                     </div>
                     <Link
-                      to={`/donations-details/${donation._id}`}
+                      to={`/donation-details/${donation._id}`}
                       className="btn btn-neutral btn-xs"
                     >
                       View
@@ -191,4 +181,4 @@ const MyDonationRequests = () => {
   );
 };
 
-export default MyDonationRequests;
+export default AllDonationRequests;

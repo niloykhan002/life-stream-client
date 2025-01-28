@@ -84,6 +84,14 @@ const Dashboard = () => {
                     <FaUser className="text-xl" /> All Users
                   </NavLink>
                 </li>
+                <li>
+                  <NavLink
+                    to={"/dashboard/all-blood-donation-request"}
+                    className={"uppercase font-semibold"}
+                  >
+                    <MdBloodtype className="text-xl" /> All Donation Request
+                  </NavLink>
+                </li>
               </ul>
             </div>
           </div>

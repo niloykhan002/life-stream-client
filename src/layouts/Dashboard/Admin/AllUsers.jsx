@@ -1,20 +1,24 @@
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import { useQuery } from "@tanstack/react-query";
+import { useState } from "react";
 import { FaEllipsisVertical } from "react-icons/fa6";
 
 const AllUsers = () => {
   const axiosSecure = useAxiosSecure();
+  const [status, setStatus] = useState("all");
 
   const { data: users = [], refetch } = useQuery({
-    queryKey: ["users"],
+    queryKey: ["users", status],
     queryFn: async () => {
-      const res = await axiosSecure.get("/users");
+      const res = await axiosSecure.get("/users", {
+        params: { status: status },
+      });
       return res.data;
     },
   });
 
   const handleBlock = (id) => {
-    const updateInfo = { status: "block" };
+    const updateInfo = { status: "blocked" };
     axiosSecure.patch(`/all-users/${id}`, updateInfo).then((res) => {
       console.log(res.data);
       refetch();
@@ -52,14 +56,13 @@ const AllUsers = () => {
             <span className="label-text">Filter</span>
           </div>
           <select
-            // onChange={handleFilter}
+            onChange={(e) => setStatus(e.target.value)}
             className="select select-bordered"
-            name="difficulty"
+            name="status"
           >
-            <option defaultChecked>All</option>
-            <option>Easy</option>
-            <option>Medium</option>
-            <option>Hard</option>
+            <option defaultChecked>all</option>
+            <option>active</option>
+            <option>blocked</option>
           </select>
         </label>
       </div>
@@ -117,54 +120,52 @@ const AllUsers = () => {
                   {user.status}
                 </td>
                 <th className="flex md:justify-end gap-4">
-                  <div className="flex items-center  gap-1">
-                    <div>
-                      {user.status === "active" ? (
+                  <div className="dropdown dropdown-end">
+                    <button
+                      tabIndex={0}
+                      role="button"
+                      className="p-2 hover:bg-base-200"
+                    >
+                      <FaEllipsisVertical className="text-2xl" />
+                    </button>
+                    <ul
+                      tabIndex={0}
+                      className="dropdown-content menu bg-base-100 rounded-box z-[1] w-40 p-2 shadow"
+                    >
+                      <li>
                         <button
-                          onClick={() => handleBlock(user._id)}
-                          className="btn bg-red-600 text-white btn-xs"
+                          onClick={() => handleVolunteer(user._id)}
+                          className="btn btn-warning text-white btn-xs"
                         >
-                          Block
+                          Make Volunteer
                         </button>
-                      ) : (
+                      </li>
+                      <li>
                         <button
-                          onClick={() => handleUnblock(user._id)}
-                          className="btn bg-green-600 text-white btn-xs"
+                          onClick={() => handleAdmin(user._id)}
+                          className="btn btn-error text-white btn-xs my-2"
                         >
-                          Unblock
+                          Make Admin
                         </button>
-                      )}
-                    </div>
-                    <div className="dropdown dropdown-end">
-                      <button
-                        tabIndex={0}
-                        role="button"
-                        className="p-2 hover:bg-base-200"
-                      >
-                        <FaEllipsisVertical className="text-2xl" />
-                      </button>
-                      <ul
-                        tabIndex={0}
-                        className="dropdown-content menu bg-base-100 rounded-box z-[1] w-40 p-2 shadow"
-                      >
-                        <li>
+                      </li>
+                      <li>
+                        {user.status === "active" ? (
                           <button
-                            onClick={() => handleVolunteer(user._id)}
-                            className="btn btn-warning text-white btn-xs"
+                            onClick={() => handleBlock(user._id)}
+                            className="btn bg-red-600 text-white btn-xs w-fu"
                           >
-                            Make Volunteer
+                            Block
                           </button>
-                        </li>
-                        <li>
+                        ) : (
                           <button
-                            onClick={() => handleAdmin(user._id)}
-                            className="btn btn-error text-white btn-xs mt-2"
+                            onClick={() => handleUnblock(user._id)}
+                            className="btn bg-green-600 text-white btn-xs"
                           >
-                            Make Admin
+                            Unblock
                           </button>
-                        </li>
-                      </ul>
-                    </div>
+                        )}
+                      </li>
+                    </ul>
                   </div>
                 </th>
               </tr>

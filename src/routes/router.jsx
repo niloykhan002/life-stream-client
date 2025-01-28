@@ -15,6 +15,7 @@ import UpdateDonations from "../layouts/Dashboard/Donor/UpdateDonations";
 import AdminHome from "../layouts/Dashboard/Admin/AdminHome";
 import AdminRoute from "./AdminRoute";
 import AllUsers from "../layouts/Dashboard/Admin/AllUsers";
+import AllDonationRequests from "../layouts/Dashboard/Admin/AllDonationRequests";
 
 const router = createBrowserRouter([
   {
@@ -82,6 +83,14 @@ const router = createBrowserRouter([
         element: (
           <AdminRoute>
             <AllUsers />
+          </AdminRoute>
+        ),
+      },
+      {
+        path: "all-blood-donation-request",
+        element: (
+          <AdminRoute>
+            <AllDonationRequests />
           </AdminRoute>
         ),
       },
