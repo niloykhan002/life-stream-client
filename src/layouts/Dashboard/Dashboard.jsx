@@ -3,8 +3,12 @@ import { IoIosCreate } from "react-icons/io";
 import { IoMenu } from "react-icons/io5";
 import { MdBloodtype, MdContentCopy } from "react-icons/md";
 import { NavLink, Outlet } from "react-router-dom";
+import useAdmin from "../../hooks/useAdmin";
+import useVolunteer from "../../hooks/useVolunteer";
 
 const Dashboard = () => {
+  const [isAdmin] = useAdmin();
+  const [isVolunteer] = useVolunteer();
   return (
     <div className="flex container mx-auto">
       <div>
@@ -34,88 +38,115 @@ const Dashboard = () => {
                 Life <span className="text-primary">Stream</span>
               </h2>
               <ul className="menu ">
-                {/* Sidebar content here */}
+                {isAdmin ? (
+                  <>
+                    {/* admin nav */}
+                    <li>
+                      <NavLink
+                        to={"/dashboard/adminHome"}
+                        className={"uppercase font-semibold"}
+                      >
+                        <FaHome className="text-xl" /> Admin Home
+                      </NavLink>
+                    </li>
+                    <li>
+                      <NavLink
+                        to={"/dashboard/all-users"}
+                        className={"uppercase font-semibold"}
+                      >
+                        <FaUser className="text-xl" /> All Users
+                      </NavLink>
+                    </li>
+                    <li>
+                      <NavLink
+                        to={"/dashboard/all-blood-donation-request"}
+                        className={"uppercase font-semibold"}
+                      >
+                        <MdBloodtype className="text-xl" /> All Donation Request
+                      </NavLink>
+                    </li>
+                    <li>
+                      <NavLink
+                        to={"/dashboard/content-management"}
+                        className={"uppercase font-semibold"}
+                      >
+                        <MdContentCopy className="text-xl" /> Content Management
+                      </NavLink>
+                    </li>
+                  </>
+                ) : isVolunteer ? (
+                  <>
+                    {/* Volunteer nav */}
+                    <li>
+                      <NavLink
+                        to={"/dashboard/volunteerHome"}
+                        className={"uppercase font-semibold"}
+                      >
+                        <FaHome className="text-xl" /> Volunteer Home
+                      </NavLink>
+                    </li>
+                    <li>
+                      <NavLink
+                        to={"/dashboard/all-donation-request"}
+                        className={"uppercase font-semibold"}
+                      >
+                        <MdBloodtype className="text-xl" /> All Blood Donation
+                        Request
+                      </NavLink>
+                    </li>
+                    <li>
+                      <NavLink
+                        to={"/dashboard/volunteer-content-management"}
+                        className={"uppercase font-semibold"}
+                      >
+                        <MdContentCopy className="text-xl" />
+                        Volunteer Content Management
+                      </NavLink>
+                    </li>
+                  </>
+                ) : (
+                  <>
+                    {/* Sidebar content here */}
+                    <li>
+                      <NavLink
+                        to={"/dashboard/profile"}
+                        className={"uppercase font-semibold"}
+                      >
+                        <FaUserCircle className="text-xl" /> Profile
+                      </NavLink>
+                    </li>
+                    <li>
+                      <NavLink
+                        to={"/dashboard/donorHome"}
+                        className={"uppercase font-semibold"}
+                      >
+                        <FaHome className="text-xl" /> Donor Home
+                      </NavLink>
+                    </li>
+                    <li>
+                      <NavLink
+                        to={"/dashboard/my-donation-requests"}
+                        className={"uppercase font-semibold"}
+                      >
+                        <MdBloodtype className="text-xl" /> My Donation Requests
+                      </NavLink>
+                    </li>
+                    <li>
+                      <NavLink
+                        to={"/dashboard/create-donation-request"}
+                        className={"uppercase font-semibold"}
+                      >
+                        <IoIosCreate className="text-xl" /> Create Donation
+                        Request
+                      </NavLink>
+                    </li>
+                  </>
+                )}
+                <div className="divider"></div>
                 <li>
-                  <NavLink
-                    to={"/dashboard/profile"}
-                    className={"uppercase font-semibold"}
-                  >
-                    <FaUserCircle className="text-xl" /> Profile
-                  </NavLink>
-                </li>
-                <li>
-                  <NavLink
-                    to={"/dashboard/donorHome"}
-                    className={"uppercase font-semibold"}
-                  >
-                    <FaHome className="text-xl" /> Donor Home
-                  </NavLink>
-                </li>
-                <li>
-                  <NavLink
-                    to={"/dashboard/my-donation-requests"}
-                    className={"uppercase font-semibold"}
-                  >
-                    <MdBloodtype className="text-xl" /> My Donation Requests
-                  </NavLink>
-                </li>
-                <li>
-                  <NavLink
-                    to={"/dashboard/create-donation-request"}
-                    className={"uppercase font-semibold"}
-                  >
-                    <IoIosCreate className="text-xl" /> Create Donation Request
-                  </NavLink>
-                </li>
-                {/* admin nav */}
-                <li>
-                  <NavLink
-                    to={"/dashboard/adminHome"}
-                    className={"uppercase font-semibold"}
-                  >
-                    <FaHome className="text-xl" /> Admin Home
-                  </NavLink>
-                </li>
-                <li>
-                  <NavLink
-                    to={"/dashboard/all-users"}
-                    className={"uppercase font-semibold"}
-                  >
-                    <FaUser className="text-xl" /> All Users
-                  </NavLink>
-                </li>
-                <li>
-                  <NavLink
-                    to={"/dashboard/all-blood-donation-request"}
-                    className={"uppercase font-semibold"}
-                  >
-                    <MdBloodtype className="text-xl" /> All Donation Request
-                  </NavLink>
-                </li>
-                <li>
-                  <NavLink
-                    to={"/dashboard/content-management"}
-                    className={"uppercase font-semibold"}
-                  >
-                    <MdContentCopy className="text-xl" /> Content Management
-                  </NavLink>
-                </li>
-                {/* Volunteer nav */}
-                <li>
-                  <NavLink
-                    to={"/dashboard/volunteerHome"}
-                    className={"uppercase font-semibold"}
-                  >
-                    <FaHome className="text-xl" /> Volunteer Home
-                  </NavLink>
-                </li>
-                <li>
-                  <NavLink
-                    to={"/dashboard/all-donation-request"}
-                    className={"uppercase font-semibold"}
-                  >
-                    <MdBloodtype className="text-xl" /> All Blood Donation
-                    Request
+                  <NavLink to={"/"} className={"uppercase font-semibold"}>
+                    <FaHome className="text-xl" />
+                    Home
                   </NavLink>
                 </li>
               </ul>

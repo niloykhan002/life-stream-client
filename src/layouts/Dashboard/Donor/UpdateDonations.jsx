@@ -33,10 +33,6 @@ const UpdateDonations = () => {
     const formValues = Object.fromEntries(formData.entries());
     formValues.donation_status = "pending";
 
-    if (info.status !== "active") {
-      return toast.error("You cannot update donation request");
-    }
-
     axiosSecure.put(`/donations/${info._id}`, formValues).then((res) => {
       console.log(res.data);
       if (res.data.modifiedCount > 0) {

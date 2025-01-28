@@ -11,7 +11,7 @@ const ContentManagement = () => {
   const [status, setStatus] = useState("all");
 
   const { data: blogs = [], refetch } = useQuery({
-    queryKey: ["users", status],
+    queryKey: ["blogs", status],
     queryFn: async () => {
       const res = await axiosPublic.get("/blogs", {
         params: { blog_status: status },
