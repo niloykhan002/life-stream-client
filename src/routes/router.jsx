@@ -19,6 +19,7 @@ import AllDonationRequests from "../layouts/Dashboard/Admin/AllDonationRequests"
 import DonationRequests from "../layouts/pages/DonationRequests/DonationRequests";
 import DonationDetails from "../layouts/pages/DonationDetails";
 import ContentManagement from "../layouts/Dashboard/Admin/ContentManagement";
+import AddBlog from "../layouts/Dashboard/Admin/AddBlog";
 
 const router = createBrowserRouter([
   {
@@ -114,6 +115,14 @@ const router = createBrowserRouter([
         element: (
           <AdminRoute>
             <ContentManagement />
+          </AdminRoute>
+        ),
+      },
+      {
+        path: "content-management/add-blog",
+        element: (
+          <AdminRoute>
+            <AddBlog />
           </AdminRoute>
         ),
       },
