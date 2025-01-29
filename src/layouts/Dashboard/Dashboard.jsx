@@ -12,7 +12,7 @@ const Dashboard = () => {
   return (
     <div className="flex container mx-auto">
       <div>
-        <div className="drawer lg:drawer-open">
+        <div className="drawer z-10 lg:drawer-open">
           <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
           <div className="drawer-content">
             {/* Page content here */}
@@ -30,7 +30,7 @@ const Dashboard = () => {
               className="drawer-overlay"
             ></label>
 
-            <div className="bg-red-200 text-base-content min-h-full lg:w-80 p-4">
+            <div className="bg-red-200 text-base-content min-h-screen lg:w-80 p-4">
               <h2
                 className="text-3xl font-bold uppercase text-center
                py-8"

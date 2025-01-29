@@ -13,8 +13,8 @@ const DonationDetails = () => {
 
   const {
     data: info = {},
-    isLoading,
     refetch,
+    isLoading,
   } = useQuery({
     queryKey: ["donation", id],
     queryFn: async () => {

@@ -7,7 +7,11 @@ const AllUsers = () => {
   const axiosSecure = useAxiosSecure();
   const [status, setStatus] = useState("all");
 
-  const { data: users = [], refetch } = useQuery({
+  const {
+    data: users = [],
+    refetch,
+    isLoading,
+  } = useQuery({
     queryKey: ["users", status],
     queryFn: async () => {
       const res = await axiosSecure.get("/users", {
@@ -16,6 +20,9 @@ const AllUsers = () => {
       return res.data;
     },
   });
+  if (isLoading) {
+    return <p>Loading...</p>;
+  }
 
   const handleBlock = (id) => {
     const updateInfo = { status: "blocked" };

@@ -10,7 +10,11 @@ const ContentManagement = () => {
   const axiosSecure = useAxiosSecure();
   const [status, setStatus] = useState("all");
 
-  const { data: blogs = [], refetch } = useQuery({
+  const {
+    data: blogs = [],
+    refetch,
+    isLoading,
+  } = useQuery({
     queryKey: ["blogs", status],
     queryFn: async () => {
       const res = await axiosPublic.get("/blogs", {
@@ -19,6 +23,9 @@ const ContentManagement = () => {
       return res.data;
     },
   });
+  if (isLoading) {
+    return <p>Loading...</p>;
+  }
 
   const handlePublish = (id) => {
     const updateInfo = { blog_status: "published" };

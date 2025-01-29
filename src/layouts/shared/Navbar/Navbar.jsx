@@ -79,7 +79,7 @@ const Navbar = () => {
             <div className="flex md:gap-4 gap-1 items-center">
               <div className="dropdown dropdown-end">
                 <img
-                  className="md:w-12 md:h-12 h-6 w-6 rounded-full"
+                  className="w-12 h-12 rounded-full"
                   src={user.photoURL}
                   role="button"
                   tabIndex={0}
