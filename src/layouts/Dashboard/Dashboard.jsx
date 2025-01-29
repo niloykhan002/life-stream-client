@@ -38,6 +38,14 @@ const Dashboard = () => {
                 Life <span className="text-primary">Stream</span>
               </h2>
               <ul className="menu ">
+                <li>
+                  <NavLink
+                    to={"/dashboard/profile"}
+                    className={"uppercase font-semibold"}
+                  >
+                    <FaUserCircle className="text-xl" /> Profile
+                  </NavLink>
+                </li>
                 {isAdmin ? (
                   <>
                     {/* admin nav */}
@@ -107,14 +115,7 @@ const Dashboard = () => {
                 ) : (
                   <>
                     {/* Sidebar content here */}
-                    <li>
-                      <NavLink
-                        to={"/dashboard/profile"}
-                        className={"uppercase font-semibold"}
-                      >
-                        <FaUserCircle className="text-xl" /> Profile
-                      </NavLink>
-                    </li>
+
                     <li>
                       <NavLink
                         to={"/dashboard/donorHome"}
