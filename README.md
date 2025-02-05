@@ -1,7 +1,3 @@
-Here’s your updated README without the **Dependencies** and **Configuration** sections:  
-
----
-
 # 🩸 Life Stream (MERN Stack)  
 
 ## 📌 Introduction  
@@ -42,8 +38,8 @@ Built using the **MERN stack**, this platform ensures a smooth, efficient, and u
 
 1. **Clone the repository**  
    ```bash
-   git clone https://github.com/your-username/blood-donation-platform.git
-   cd blood-donation-platform
+   git clone https://github.com/niloykhan002/life-stream-client.git
+   cd life-stream-client
    ```
 
 2. **Install dependencies**  
