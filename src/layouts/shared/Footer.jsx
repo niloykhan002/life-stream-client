@@ -1,12 +1,21 @@
 import { Link } from "react-router-dom";
+import logo from "../../assets/logo.png";
 
 const Footer = () => {
   return (
-    <footer className="footer bg-black text-white p-10">
+    <footer className="footer bg-base-200 text-dark1 p-10">
       <aside>
-        <h2 className="text-3xl font-bold uppercase">
-          Life <span className=" text-primary">Stream</span>
-        </h2>
+        <Link
+          to={"/"}
+          className="btn border-none btn-ghost hover:bg-transparent font-bold text-lg uppercase md:text-2xl"
+        >
+          <div className="h-8 w-8">
+            <img src={logo} alt="" />
+          </div>
+          <div>
+            Life <span className="text-primary">Stream</span>
+          </div>
+        </Link>
         <p>
           Life Stream is a real-time free platform to help blood <br />{" "}
           searchers connect voluntary blood donors around Bangladesh.

@@ -2,3 +2,10 @@
   background-color: #be123c !important;
   color: white !important;
 }
+.active:hover {
+  background-color: #ffe4e6 !important ;
+  color: rgba(19, 19, 19, 0.7) !important;
+}
+.inactive:hover {
+  background-color: transparent !important;
+}

@@ -1,5 +1,6 @@
 import { Link, NavLink } from "react-router-dom";
 import useAuth from "../../../hooks/useAuth";
+import logo from "../../../assets/logo.png";
 import "./Navbar.css";
 
 const Navbar = () => {
@@ -9,7 +10,9 @@ const Navbar = () => {
       <li>
         <NavLink
           to={"/"}
-          className={({ isActive }) => (isActive ? "active" : "")}
+          className={({ isActive }) =>
+            isActive ? "active text-sm " : " inactive hover:text-primary"
+          }
         >
           Home
         </NavLink>
@@ -17,7 +20,9 @@ const Navbar = () => {
       <li>
         <NavLink
           to={"/donation-requests"}
-          className={({ isActive }) => (isActive ? "active" : "")}
+          className={({ isActive }) =>
+            isActive ? "active text-sm" : "inactive text-sm hover:text-primary"
+          }
         >
           Donation Requests
         </NavLink>
@@ -25,7 +30,9 @@ const Navbar = () => {
       <li>
         <NavLink
           to={"/blogs"}
-          className={({ isActive }) => (isActive ? "active" : "")}
+          className={({ isActive }) =>
+            isActive ? "active text-sm" : "inactive text-sm hover:text-primary"
+          }
         >
           Blog
         </NavLink>
@@ -37,7 +44,7 @@ const Navbar = () => {
   };
 
   return (
-    <div className=" bg-black text-white fixed z-10 right-0 left-0 top-0">
+    <div className=" bg-base-200 text-dark1 fixed z-10 right-0 left-0 top-0">
       <div className="navbar container mx-auto">
         <div className="navbar-start">
           <div className="dropdown">
@@ -66,9 +73,14 @@ const Navbar = () => {
           </div>
           <Link
             to={"/"}
-            className="btn btn-ghost font-bold text-lg uppercase md:text-3xl"
+            className="btn border-none btn-ghost hover:bg-secondary font-bold text-lg uppercase md:text-3xl"
           >
-            Life <span className="text-primary">Stream</span>
+            <div className="h-12 w-12">
+              <img src={logo} alt="" />
+            </div>
+            <div>
+              Life <span className="text-primary">Stream</span>
+            </div>
           </Link>
         </div>
         <div className="navbar-center hidden lg:flex">
@@ -112,12 +124,12 @@ const Navbar = () => {
           ) : (
             <div className="md:space-x-4 space-x-1 flex items-center">
               <Link to={"/login"}>
-                <button className="btn border-none btn-xs md:h-12 bg-primary text-white md:w-24">
+                <button className="btn btn-xs border-none rounded-md md:btn-sm bg-primary text-white hover:bg-secondary hover:text-dark2">
                   Login
                 </button>
               </Link>
               <Link to={"/register"}>
-                <button className="btn border-none btn-xs md:h-12 bg-primary text-white md:w-24">
+                <button className="btn btn-xs border-none rounded-md md:btn-sm bg-primary text-white hover:bg-secondary hover:text-dark2">
                   Register
                 </button>
               </Link>
