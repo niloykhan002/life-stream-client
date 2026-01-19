@@ -1,8 +1,10 @@
 import toast, { Toaster } from "react-hot-toast";
 import useAuth from "../hooks/useAuth";
 import { Link, useNavigate } from "react-router-dom";
+import logo from "../assets/logo.png";
 import Lottie from "lottie-react";
 import registerLottie from "../assets/lottie/register.json";
+import { IoEye, IoEyeOff } from "react-icons/io5";
 import { useState } from "react";
 import useAxiosPublic from "../hooks/useAxiosPublic";
 import useGetDistricts from "../hooks/useGetDistricts";
@@ -15,6 +17,7 @@ const Register = () => {
   const axiosPublic = useAxiosPublic();
   const { createUser, updateUser } = useAuth();
   const navigate = useNavigate();
+  const [showPassword, setShowPassword] = useState(false);
   const [districts] = useGetDistricts();
   const [selected, setSelected] = useState();
   const [upazila] = useGetUpazila(selected);
@@ -32,15 +35,6 @@ const Register = () => {
 
     if (password !== confirm_password) {
       return toast.error("Please ensure both passwords are the same");
-    }
-    if (password.length < 6) {
-      return toast.error("Length must be at least 6 character ");
-    }
-    if (!/[A-Z]/.test(password)) {
-      return toast.error("Must have an Uppercase letter in the password");
-    }
-    if (!/[a-z]/.test(password)) {
-      return toast.error("Must have a Lowercase letter in the password");
     }
 
     const res = await axiosPublic.post(image_hosting_api, image, {
@@ -85,13 +79,28 @@ const Register = () => {
   return (
     <div className="flex items-center justify-center mt-32 mb-20">
       <Toaster />
-      <div className="lg:flex flex-row-reverse items-center gap-6 shadow-lg rounded-2xl bg-red-200">
-        <div className="md:w-[600px] w-80 lg:mx-8">
+      <div className="lg:flex flex-row-reverse  gap-5 shadow-lg rounded-2xl bg-base-100">
+        <div className=" md:w-[550px] flex flex-col justify-center  w-80 lg:px-8 rounded-lg bg-secondary">
+          <div className="flex justify-center items-center gap-2 pt-5">
+            <div className="h-10 w-10">
+              <img src={logo} alt="" />
+            </div>
+            <div className="uppercase text-lg md:text-3xl font-bold">
+              Life <span className="text-primary">Stream</span>
+            </div>
+          </div>
+          <h1 className="text-center font-heading text-dark1 uppercase text-lg md:text-2xl font-bold pt-8">
+            Welcome to Life Stream!
+          </h1>
+          <p className="text-center font-body text-dark2 mt-4">
+            Where every drop becomes a lifeline. Join a community of heroes
+            saving lives every day.
+          </p>
           <Lottie animationData={registerLottie} />
         </div>
         <div className="card w-full lg:max-w-md shrink-0 rounded-none lg:border-r-2 border-white">
-          <h1 className="font-bold text-4xl text-center pt-8 text-primary ">
-            Register
+          <h1 className="font-bold uppercase text-4xl text-center pt-8 text-primary ">
+            Create Account
           </h1>
           <form onSubmit={handleRegister} className="card-body">
             <div className="form-control">
@@ -173,28 +182,51 @@ const Register = () => {
               <label className="label">
                 <span className="label-text">Password</span>
               </label>
-              <input
-                type="password"
-                name="password"
-                placeholder="Enter Your Password"
-                className="input input-bordered"
-                required
-              />
+              <div className="relative">
+                <input
+                  type={showPassword ? "text" : "password"}
+                  name="password"
+                  className="input input-bordered w-full validator"
+                  required
+                  placeholder="Password"
+                  minLength={8}
+                  pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
+                  title="Must be more than 8 characters, including number, lowercase letter, uppercase letter"
+                />
+                <button
+                  type="button"
+                  onClick={() => setShowPassword(!showPassword)}
+                  className="absolute top-1/2 right-3 -translate-y-1/2 text-dark3 hover:text-dark2"
+                >
+                  {showPassword ? <IoEyeOff size={15} /> : <IoEye size={15} />}
+                </button>
+              </div>
             </div>
             <div className="form-control">
               <label className="label">
                 <span className="label-text">Confirm Password</span>
               </label>
-              <input
-                type="password"
-                name="confirm_password"
-                placeholder="Enter Password Again"
-                className="input input-bordered"
-                required
-              />
+              <div className="relative">
+                <input
+                  type={showPassword ? "text" : "password"}
+                  name="confirm_password"
+                  className="input input-bordered w-full"
+                  required
+                  placeholder="Enter Password Again"
+                />
+                <button
+                  type="button"
+                  onClick={() => setShowPassword(!showPassword)}
+                  className="absolute top-1/2 right-3 -translate-y-1/2 text-dark3 hover:text-dark2"
+                >
+                  {showPassword ? <IoEyeOff size={15} /> : <IoEye size={15} />}
+                </button>
+              </div>
             </div>
             <div className="form-control mt-6">
-              <button className="btn bg-primary text-white">Register</button>
+              <button className="btn uppercase border-none bg-primary text-white">
+                Create Account
+              </button>
             </div>
           </form>
           <p className="pl-8 pb-8">

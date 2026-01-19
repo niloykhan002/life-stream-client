@@ -10,6 +10,10 @@ export default {
         dark2: "rgba(19, 19, 19, 0.7)",
         dark3: "rgba(19, 19, 19, 0.6)",
       },
+      fontFamily: {
+        heading: ["Poppins", "sans-serif"],
+        body: ["Inter", "sans-serif"],
+      },
     },
   },
   plugins: [require("daisyui")],

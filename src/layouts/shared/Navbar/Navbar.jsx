@@ -100,12 +100,16 @@ const Navbar = () => {
                 />
                 <ul
                   tabIndex={0}
-                  className="dropdown-content menu bg-black rounded-box z-[1] w-52 p-2 shadow"
+                  className="dropdown-content menu gap-1 bg-dark1 rounded-box z-[1] w-38 p-2 shadow"
                 >
                   <li>
                     <NavLink
                       to={"/dashboard/profile"}
-                      className={({ isActive }) => (isActive ? "active" : "")}
+                      className={({ isActive }) =>
+                        isActive
+                          ? "active btn btn-xs bg-primary text-white md:w-24"
+                          : "btn btn-xs border-none bg-primary text-white md:w-24"
+                      }
                     >
                       Dashboard
                     </NavLink>
@@ -113,7 +117,7 @@ const Navbar = () => {
                   <li>
                     <button
                       onClick={handleSignOut}
-                      className="btn border-none btn-sm  bg-primary text-white md:w-24"
+                      className="btn border-none btn-xs  bg-primary text-white md:w-24"
                     >
                       LogOut
                     </button>
