@@ -7,7 +7,7 @@ const Footer = () => {
       <aside>
         <Link
           to={"/"}
-          className="btn border-none btn-ghost hover:bg-transparent font-bold text-lg uppercase md:text-2xl"
+          className="btn font-heading border-none btn-ghost hover:bg-transparent font-bold text-lg uppercase md:text-2xl"
         >
           <div className="h-8 w-8">
             <img src={logo} alt="" />

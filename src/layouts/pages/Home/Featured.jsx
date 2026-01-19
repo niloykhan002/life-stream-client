@@ -3,7 +3,7 @@ import img1 from "../../../assets/featured.jpg";
 const Featured = () => {
   return (
     <div className="container mx-auto">
-      <h2 className="text-center text-4xl font-bold my-20">
+      <h2 className="text-center text-4xl font-heading font-bold my-20">
         Our <span className="text-primary">Features</span>
       </h2>
       <div>
@@ -13,7 +13,9 @@ const Featured = () => {
             className="md:w-[550px] h-96 object-cover rounded-lg shadow-2xl"
           />
           <div>
-            <h1 className="text-5xl font-bold">Why Choose Life Stream ?</h1>
+            <h1 className="text-5xl font-heading font-bold">
+              Why Choose Life Stream ?
+            </h1>
             <p className="text-primary font-bold text-lg mt-6 mb-4">
               Connect Donors and Recipients
             </p>

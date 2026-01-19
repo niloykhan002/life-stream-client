@@ -85,7 +85,7 @@ const Register = () => {
             <div className="h-10 w-10">
               <img src={logo} alt="" />
             </div>
-            <div className="uppercase text-lg md:text-3xl font-bold">
+            <div className="uppercase font-heading text-lg md:text-3xl font-bold">
               Life <span className="text-primary">Stream</span>
             </div>
           </div>
@@ -99,7 +99,7 @@ const Register = () => {
           <Lottie animationData={registerLottie} />
         </div>
         <div className="card w-full lg:max-w-md shrink-0 rounded-none lg:border-r-2 border-white">
-          <h1 className="font-bold uppercase text-4xl text-center pt-8 text-primary ">
+          <h1 className="font-bold font-heading uppercase text-4xl text-center pt-8 text-primary ">
             Create Account
           </h1>
           <form onSubmit={handleRegister} className="card-body">

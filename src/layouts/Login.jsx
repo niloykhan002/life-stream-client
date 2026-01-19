@@ -36,8 +36,8 @@ const Login = () => {
           <Lottie animationData={loginLottie} />
         </div>
         <div className="card  w-full lg:max-w-md shrink-0 rounded-none lg:border-r-2 border-white">
-          <h1 className="font-bold text-4xl text-center pt-8 text-dark1">
-            Welcome Back Hero!
+          <h1 className="font-bold font-heading text-4xl text-center pt-8 text-dark1">
+            Welcome Back!
           </h1>
           <form onSubmit={handleLogin} className="card-body">
             <div className="form-control">
