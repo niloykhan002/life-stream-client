@@ -2,6 +2,7 @@ import { useState } from "react";
 import useAxiosPublic from "../../../hooks/useAxiosPublic";
 import useGetDistricts from "../../../hooks/useGetDistricts";
 import useGetUpazila from "../../../hooks/useGetUpazila";
+import { GoSearch } from "react-icons/go";
 
 const Search = () => {
   const axiosPublic = useAxiosPublic();
@@ -67,8 +68,11 @@ const Search = () => {
               ))}
             </select>
           </div>
-          <button className="btn btn-block bg-primary text-white font-bold">
-            Search
+          <button className="btn btn-block border-none bg-primary text-white font-bold">
+            <p>Search</p>
+            <span className="text-sm">
+              <GoSearch />
+            </span>
           </button>
         </form>
       </div>

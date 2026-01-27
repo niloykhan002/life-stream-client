@@ -1,6 +1,8 @@
 import { Link, NavLink } from "react-router-dom";
 import useAuth from "../../../hooks/useAuth";
 import logo from "../../../assets/logo.png";
+import { IoSearch } from "react-icons/io5";
+import { FaUser } from "react-icons/fa";
 import "./Navbar.css";
 
 const Navbar = () => {
@@ -66,16 +68,16 @@ const Navbar = () => {
             </div>
             <ul
               tabIndex={0}
-              className="menu menu-sm dropdown-content bg-black rounded-box z-[1] mt-3 w-40 p-2 shadow"
+              className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-40 p-2 shadow"
             >
               {link}
             </ul>
           </div>
           <Link
             to={"/"}
-            className="btn font-heading border-none btn-ghost hover:bg-secondary font-bold text-lg uppercase md:text-3xl"
+            className="btn px-1 md:px-2 font-heading border-none btn-ghost hover:bg-secondary font-bold text-lg uppercase md:text-3xl"
           >
-            <div className="h-12 w-12">
+            <div className="h-6 w-6 md:h-12 md:w-12">
               <img src={logo} alt="" />
             </div>
             <div>
@@ -129,12 +131,15 @@ const Navbar = () => {
             <div className="md:space-x-4 space-x-1 flex items-center">
               <Link to={"/login"}>
                 <button className="btn btn-xs border-none rounded-md md:btn-sm bg-primary text-white hover:bg-secondary hover:text-dark2">
-                  Login
+                  <p>Login</p>
+                  <span>
+                    <FaUser />
+                  </span>
                 </button>
               </Link>
-              <Link to={"/register"}>
-                <button className="btn btn-xs border-none rounded-md md:btn-sm bg-primary text-white hover:bg-secondary hover:text-dark2">
-                  Register
+              <Link to={"/search"}>
+                <button className="flex justify-center items-center text-dark3 text-xl hover:text-primary">
+                  <IoSearch />
                 </button>
               </Link>
             </div>

@@ -28,7 +28,7 @@ const AddBlog = () => {
         headers: {
           "Content-Type": "multipart/form-data",
         },
-      }
+      },
     );
     const photoURL = res.data.data.display_url;
 
@@ -78,7 +78,7 @@ const AddBlog = () => {
               type="file"
               name="blog_thumbnail"
               required
-              className="file-input file-input-bordered file-input-error w-full"
+              className="file-input file-input-bordered w-full"
             />
           </div>
           <div className="form-control">

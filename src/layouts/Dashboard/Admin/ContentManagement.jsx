@@ -72,7 +72,7 @@ const ContentManagement = () => {
       <div className="flex justify-end items-end">
         <Link
           to={"/dashboard/content-management/add-blog"}
-          className="btn bg-primary text-white"
+          className="btn bg-primary border-none text-white"
         >
           Add Blog
         </Link>
@@ -110,21 +110,21 @@ const ContentManagement = () => {
               {blog.blog_status === "draft" ? (
                 <button
                   onClick={() => handlePublish(blog._id)}
-                  className="btn bg-primary text-white"
+                  className="btn bg-primary border-none text-white"
                 >
                   Publish
                 </button>
               ) : (
                 <button
                   onClick={() => handleUnpublish(blog._id)}
-                  className="btn bg-primary text-white"
+                  className="btn bg-primary border-none text-white"
                 >
                   Unpublish
                 </button>
               )}
               <button
                 onClick={() => handleDelete(blog._id)}
-                className="btn bg-primary text-white"
+                className="btn bg-primary border-none ml-1 text-white"
               >
                 Delete
               </button>

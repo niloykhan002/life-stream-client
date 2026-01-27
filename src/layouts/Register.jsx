@@ -79,8 +79,8 @@ const Register = () => {
   return (
     <div className="flex items-center justify-center mt-32 mb-20">
       <Toaster />
-      <div className="lg:flex flex-row-reverse  gap-5 shadow-lg rounded-2xl bg-base-100">
-        <div className=" md:w-[550px] flex flex-col justify-center  w-80 lg:px-8 rounded-lg bg-secondary">
+      <div className="lg:flex flex-row-reverse gap-5 shadow-lg rounded-2xl bg-base-100">
+        <div className=" md:w-[550px] flex flex-col justify-center  lg:px-8 rounded-lg bg-secondary">
           <div className="flex justify-center items-center gap-2 pt-5">
             <div className="h-10 w-10">
               <img src={logo} alt="" />
@@ -99,7 +99,7 @@ const Register = () => {
           <Lottie animationData={registerLottie} />
         </div>
         <div className="card w-full lg:max-w-md shrink-0 rounded-none lg:border-r-2 border-white">
-          <h1 className="font-bold font-heading uppercase text-4xl text-center pt-8 text-primary ">
+          <h1 className="font-bold font-heading uppercase text-lg md:text-3xl text-center pt-8 text-dark1 ">
             Create Account
           </h1>
           <form onSubmit={handleRegister} className="card-body">
@@ -136,7 +136,7 @@ const Register = () => {
                 type="file"
                 name="image"
                 required
-                className="file-input file-input-bordered file-input-error w-full"
+                className="file-input file-input-bordered  w-full"
               />
             </div>
             <div className="form-control">

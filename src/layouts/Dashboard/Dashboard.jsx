@@ -30,7 +30,7 @@ const Dashboard = () => {
               className="drawer-overlay"
             ></label>
 
-            <div className="bg-red-200 text-base-content min-h-screen lg:w-80 p-4">
+            <div className="bg-red-200 text-base-content fixed top-0 h-screen lg:w-80 p-4">
               <h2
                 className="text-3xl font-bold uppercase text-center
                py-8"
@@ -155,7 +155,7 @@ const Dashboard = () => {
           </div>
         </div>
       </div>
-      <div className="flex-1 p-8">
+      <div className="flex-1 lg:ml-80 mt-6  md:p-8">
         <Outlet />
       </div>
     </div>
