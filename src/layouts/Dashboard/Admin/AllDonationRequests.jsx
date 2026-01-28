@@ -67,7 +67,7 @@ const AllDonationRequests = () => {
     return <p>Loading...</p>;
   }
   return (
-    <div>
+    <div className="bg-white rounded-lg">
       <h2 className="text-center text-4xl font-bold mb-10 mt-12">
         Donation <span className="text-primary">Requests</span>
       </h2>
@@ -112,7 +112,8 @@ const AllDonationRequests = () => {
                 <th>{index + 1}</th>
                 <td>{donation.recipient_name}</td>
                 <td>
-                  {donation.recipient_upazila}, {donation.recipient_district}{" "}
+                  {donation.recipient_upazila},{" "}
+                  {donation.recipient_district}{" "}
                 </td>
                 <td>{donation.date}</td>
                 <td>{donation.time}</td>

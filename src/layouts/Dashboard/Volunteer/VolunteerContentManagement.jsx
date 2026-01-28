@@ -35,7 +35,7 @@ const VolunteerContentManagement = () => {
       </div>
 
       {blogs.map((blog) => (
-        <div key={blog._id} className="hero bg-base-200 p-10 rounded-xl my-8">
+        <div key={blog._id} className="hero bg-white p-10 rounded-xl my-8">
           <div className="hero-content flex-col lg:flex-row-reverse">
             <img
               src={blog.thumbnail_image}

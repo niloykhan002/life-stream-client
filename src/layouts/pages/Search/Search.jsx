@@ -23,8 +23,8 @@ const Search = () => {
       .then((res) => setDonors(res.data));
   };
   return (
-    <div className="mt-40 mb-12 container mx-auto">
-      <div className=" bg-base-200 p-10 rounded-lg ">
+    <div className="container mx-auto py-20">
+      <div className=" bg-white p-10 rounded-lg ">
         <h2 className="text-center text-4xl font-bold mb-10">
           Search <span className="text-primary">Donors</span>
         </h2>

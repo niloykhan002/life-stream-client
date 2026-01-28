@@ -3,7 +3,7 @@ import logo from "../../assets/logo.png";
 
 const Footer = () => {
   return (
-    <footer className="footer bg-base-200 text-dark1 p-10">
+    <footer className="footer bg-white text-dark1 p-10">
       <aside>
         <Link
           to={"/"}

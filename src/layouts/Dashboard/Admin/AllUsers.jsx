@@ -53,12 +53,12 @@ const AllUsers = () => {
     });
   };
   return (
-    <div className="container mx-auto my-20">
-      <h1 className="text-center text-4xl font-bold mb-12">
+    <div className="bg-white rounded-lg">
+      <h1 className="text-center text-4xl font-bold pt-12">
         All <span className="text-primary">Users</span>
       </h1>
       <div className="flex justify-end mr-4">
-        <label className="form-control w-fit my-12">
+        <label className="form-control w-fit my-8">
           <div className="label">
             <span className="label-text">Filter</span>
           </div>
@@ -113,8 +113,8 @@ const AllUsers = () => {
                     user.role === "admin"
                       ? "text-red-600"
                       : user.role === "volunteer"
-                      ? "text-yellow-600"
-                      : "text-green-600"
+                        ? "text-yellow-600"
+                        : "text-green-600"
                   }
                 >
                   {user.role}

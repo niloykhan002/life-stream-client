@@ -29,7 +29,7 @@ const Login = () => {
   };
 
   return (
-    <div className="flex items-center justify-center mt-32 mb-20">
+    <div className="flex items-center justify-center py-20">
       <Toaster />
       <div className="lg:flex flex-row-reverse items-center gap-6 shadow-lg rounded-2xl bg-base-100">
         <div className="md:w-[500px] w-96 md:mx-8">

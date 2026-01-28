@@ -6,7 +6,7 @@ import { FaUser } from "react-icons/fa";
 import "./Navbar.css";
 
 const Navbar = () => {
-  const { user, logOut } = useAuth();
+  const { user } = useAuth();
   const link = (
     <>
       <li>
@@ -31,6 +31,16 @@ const Navbar = () => {
       </li>
       <li>
         <NavLink
+          to={"/search"}
+          className={({ isActive }) =>
+            isActive ? "active text-sm" : "inactive text-sm hover:text-primary"
+          }
+        >
+          Find Donors
+        </NavLink>
+      </li>
+      <li>
+        <NavLink
           to={"/blogs"}
           className={({ isActive }) =>
             isActive ? "active text-sm" : "inactive text-sm hover:text-primary"
@@ -41,12 +51,9 @@ const Navbar = () => {
       </li>
     </>
   );
-  const handleSignOut = () => {
-    logOut();
-  };
 
   return (
-    <div className=" bg-base-200 text-dark1 fixed z-10 right-0 left-0 top-0">
+    <div className=" bg-white shadow-md text-dark1 fixed z-10 right-0 left-0 top-0">
       <div className="navbar container mx-auto">
         <div className="navbar-start">
           <div className="dropdown">
@@ -75,7 +82,7 @@ const Navbar = () => {
           </div>
           <Link
             to={"/"}
-            className="btn px-1 md:px-2 font-heading border-none btn-ghost hover:bg-secondary font-bold text-lg uppercase md:text-3xl"
+            className="btn px-0 font-heading border-none btn-ghost hover:bg-transparent font-bold text-lg uppercase md:text-3xl"
           >
             <div className="h-6 w-6 md:h-12 md:w-12">
               <img src={logo} alt="" />
@@ -89,44 +96,31 @@ const Navbar = () => {
           <ul className="menu menu-horizontal px-1">{link}</ul>
         </div>
         <div className="navbar-end">
+          <Link to={"/search"}>
+            <button className="flex mr-3 justify-center items-center text-dark3 text-xl hover:text-primary">
+              <IoSearch />
+            </button>
+          </Link>
           {user ? (
-            <div className="flex md:gap-4 gap-1 items-center">
-              <div className="dropdown dropdown-end">
-                <img
-                  className="w-12 h-12 rounded-full"
-                  src={user.photoURL}
-                  role="button"
-                  tabIndex={0}
-                  id="image-hover"
-                  alt=""
-                />
-                <ul
-                  tabIndex={0}
-                  className="dropdown-content menu gap-1 bg-dark1 rounded-box z-[1] w-38 p-2 shadow"
-                >
-                  <li>
-                    <NavLink
-                      to={"/dashboard/profile"}
-                      className={({ isActive }) =>
-                        isActive
-                          ? "active btn btn-xs bg-primary text-white md:w-24"
-                          : "btn btn-xs border-none bg-primary text-white md:w-24"
-                      }
-                    >
-                      Dashboard
-                    </NavLink>
-                  </li>
-                  <li>
-                    <button
-                      onClick={handleSignOut}
-                      className="btn border-none btn-xs  bg-primary text-white md:w-24"
-                    >
-                      LogOut
-                    </button>
-                  </li>
-                </ul>
+            <Link to={"/dashboard/profile"}>
+              <div
+                className="flex justify-center bg-base-200 p-1 rounded-full items-center gap-2 tooltip tooltip-bottom"
+                data-tip="view profile"
+              >
+                <div>
+                  <img
+                    className="w-8 h-8 rounded-full"
+                    src={user.photoURL}
+                    alt=""
+                  />
+                </div>
+                <div>
+                  <p className="text-dark2 text-sm font-heading">
+                    {user.displayName}
+                  </p>
+                </div>
               </div>
-            </div>
+            </Link>
           ) : (
             <div className="md:space-x-4 space-x-1 flex items-center">
               <Link to={"/login"}>
@@ -135,11 +129,6 @@ const Navbar = () => {
                   <span>
                     <FaUser />
                   </span>
-                </button>
-              </Link>
-              <Link to={"/search"}>
-                <button className="flex justify-center items-center text-dark3 text-xl hover:text-primary">
-                  <IoSearch />
                 </button>
               </Link>
             </div>

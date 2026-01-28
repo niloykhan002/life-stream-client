@@ -1,12 +1,10 @@
 import { FaUser } from "react-icons/fa";
-import useAuth from "../../../hooks/useAuth";
 import { FaSackDollar } from "react-icons/fa6";
 import { BiSolidDonateHeart } from "react-icons/bi";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import { useQuery } from "@tanstack/react-query";
 
 const VolunteerHome = () => {
-  const { user } = useAuth();
   const axiosSecure = useAxiosSecure();
 
   const { data: donors = [] } = useQuery({
@@ -27,12 +25,11 @@ const VolunteerHome = () => {
   });
   return (
     <div>
-      <h2 className="text-3xl font-bold ">Welcome {user.displayName}</h2>
       <h2 className="text-center text-3xl font-bold uppercase my-12 text-primary">
         Statistics
       </h2>
       <div className="flex items-center gap-8">
-        <div className="flex items-center gap-10 p-10 bg-base-200 rounded-xl w-full">
+        <div className="flex items-center gap-10 p-10 bg-white shadow-sm rounded-xl w-full">
           <div className="bg-primary p-4 rounded-xl">
             <FaUser className="text-xl text-white" />
           </div>
@@ -43,7 +40,7 @@ const VolunteerHome = () => {
             </p>
           </div>
         </div>
-        <div className="flex items-center gap-10 p-10 bg-base-200 rounded-xl w-full">
+        <div className="flex items-center gap-10 p-10 bg-white shadow-sm rounded-xl w-full">
           <div className="bg-primary p-4 rounded-xl">
             <FaSackDollar className="text-xl text-white" />
           </div>
@@ -53,7 +50,7 @@ const VolunteerHome = () => {
           </div>
         </div>
       </div>
-      <div className="flex justify-center items-center p-10 bg-base-200 rounded-xl  mt-8">
+      <div className="flex justify-center items-center p-10 bg-white shadow-sm rounded-xl  mt-8">
         <div className="flex items-center gap-10 ">
           <div className="bg-primary p-4 rounded-xl">
             <BiSolidDonateHeart className="text-xl text-white" />

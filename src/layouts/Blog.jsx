@@ -15,9 +15,12 @@ const Blog = () => {
     },
   });
   return (
-    <div className="container mx-auto mt-40">
+    <div className="container mx-auto py-20">
       {blogs.map((blog) => (
-        <div key={blog._id} className=" bg-base-200 p-10 rounded-xl my-8">
+        <div
+          key={blog._id}
+          className=" bg-white p-10 shadow-lg rounded-xl my-8"
+        >
           <div className="md:flex justify-between items-center">
             <div>
               <h1 className="text-2xl font-bold mb-4">{blog.blog_title}</h1>

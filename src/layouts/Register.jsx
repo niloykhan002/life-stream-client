@@ -77,7 +77,7 @@ const Register = () => {
       });
   };
   return (
-    <div className="flex items-center justify-center mt-32 mb-20">
+    <div className="flex items-center justify-center py-20">
       <Toaster />
       <div className="lg:flex flex-row-reverse gap-5 shadow-lg rounded-2xl bg-base-100">
         <div className=" md:w-[550px] flex flex-col justify-center  lg:px-8 rounded-lg bg-secondary">

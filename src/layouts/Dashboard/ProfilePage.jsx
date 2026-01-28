@@ -56,7 +56,7 @@ const ProfilePage = () => {
         headers: {
           "Content-Type": "multipart/form-data",
         },
-      }
+      },
     );
     formValues.image = res.data.data.display_url;
 
@@ -71,7 +71,7 @@ const ProfilePage = () => {
   };
 
   return (
-    <div className=" bg-base-200 p-10 rounded-lg ">
+    <div className=" bg-white p-10 rounded-lg ">
       <Toaster />
       <h2 className="uppercase text-xl font-semibold">Profile</h2>
       <form onSubmit={handleUpdate} className="space-y-4 mt-8">

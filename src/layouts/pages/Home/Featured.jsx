@@ -2,12 +2,12 @@ import img1 from "../../../assets/featured.jpg";
 
 const Featured = () => {
   return (
-    <div className="container mx-auto">
-      <h2 className="text-center text-4xl font-heading font-bold my-20">
+    <div className="container mx-auto py-20">
+      <h2 className="text-center text-4xl font-heading font-bold mb-20">
         Our <span className="text-primary">Features</span>
       </h2>
       <div>
-        <div className="hero-content max-w-none flex-col lg:justify-between  lg:flex-row-reverse lg:items-end gap-10">
+        <div className="hero-content px-0 max-w-none flex-col lg:justify-between  lg:flex-row-reverse lg:items-end gap-10">
           <img
             src={img1}
             className="md:w-[550px] h-96 object-cover rounded-lg shadow-2xl"
