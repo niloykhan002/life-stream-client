@@ -11,20 +11,21 @@ const Login = () => {
   const { signInUser } = useAuth();
   const location = useLocation();
   const navigate = useNavigate();
-  const toGo = location.state || "/";
+  const toGo = location.state?.from || "/";
+
   const handleLogin = (e) => {
     e.preventDefault();
-    const email = e.target.email.value;
+    const email = e.target.email.value.trim();
     const password = e.target.password.value;
 
     signInUser(email, password)
       .then((result) => {
-        console.log(result.user);
-        navigate(toGo);
+        console.log("Login successful:", result.user.uid);
+        navigate(toGo, { replace: true });
       })
       .catch((error) => {
-        console.log(error);
-        toast.error(error.message);
+        console.error("Login error:", error.code);
+        toast.error("Login failed. Please try again");
       });
   };
 

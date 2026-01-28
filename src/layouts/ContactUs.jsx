@@ -3,9 +3,9 @@ import { MdEmail } from "react-icons/md";
 
 const ContactUs = () => {
   return (
-    <div className="my-12 container mx-auto">
-      <h2 className="text-center font-heading text-4xl font-bold my-20 uppercase">
-        Contact Us
+    <div className="container mx-auto pb-20">
+      <h2 className="text-center font-heading text-4xl font-bold py-20 uppercase">
+        Contact <span className="text-primary">Us</span>
       </h2>
       <div className="lg:flex items-center gap-40">
         <div className="bg-red-200 p-10 shadow-lg rounded-xl flex flex-col gap-4 m-4">
@@ -39,7 +39,7 @@ const ContactUs = () => {
             </div>
           </div>
         </div>
-        <form className="space-y-4 flex-1 bg-base-200 p-10 rounded-lg shadow-lg">
+        <form className="space-y-4 flex-1 bg-white p-10 rounded-lg shadow-lg">
           <h2 className="text-2xl font-bold">Send Message</h2>
           <div className="lg:flex items-center gap-4">
             <label className="form-control w-full">

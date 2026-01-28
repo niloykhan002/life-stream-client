@@ -43,7 +43,7 @@ const UpdateDonations = () => {
   return (
     <div>
       <Toaster />
-      <div className=" bg-base-200 p-10 rounded-lg ">
+      <div className=" bg-white p-10 rounded-lg ">
         <h2 className="text-center text-4xl font-bold mb-10">
           Update Donation Request
         </h2>

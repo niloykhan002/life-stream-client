@@ -81,7 +81,7 @@ const Dashboard = () => {
                       </li>
                       <li>
                         <NavLink
-                          to={"/dashboard/all-blood-donation-request"}
+                          to={"/dashboard/all-donation-request"}
                           className={"uppercase font-semibold"}
                         >
                           <MdBloodtype className="text-xl" /> All Donation
@@ -114,17 +114,17 @@ const Dashboard = () => {
                           to={"/dashboard/all-donation-request"}
                           className={"uppercase font-semibold"}
                         >
-                          <MdBloodtype className="text-xl" /> All Blood Donation
+                          <MdBloodtype className="text-xl" /> All Donation
                           Request
                         </NavLink>
                       </li>
                       <li>
                         <NavLink
-                          to={"/dashboard/volunteer-content-management"}
+                          to={"/dashboard/content-management"}
                           className={"uppercase font-semibold"}
                         >
-                          <MdContentCopy className="text-xl" />
-                          Volunteer Content Management
+                          <MdContentCopy className="text-xl" /> Content
+                          Management
                         </NavLink>
                       </li>
                     </>

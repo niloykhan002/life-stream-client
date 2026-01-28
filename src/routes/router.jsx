@@ -22,10 +22,10 @@ import ContentManagement from "../layouts/Dashboard/Admin/ContentManagement";
 import AddBlog from "../layouts/Dashboard/Admin/AddBlog";
 import VolunteerHome from "../layouts/Dashboard/Volunteer/VolunteerHome";
 import VolunteerRoute from "./VolunteerRoute";
-import AllBloodDonationRequests from "../layouts/Dashboard/Volunteer/AllBloodDonationRequests";
-import VolunteerContentManagement from "../layouts/Dashboard/Volunteer/VolunteerContentManagement";
 import Blog from "../layouts/Blog";
 import BlogDetails from "../layouts/BlogDetails";
+import ContactUs from "../layouts/ContactUs";
+import AdminOrVolunteerRoute from "./AdminOrVolunteerRoute";
 
 const router = createBrowserRouter([
   {
@@ -44,6 +44,10 @@ const router = createBrowserRouter([
       {
         path: "/donation-requests",
         element: <DonationRequests />,
+      },
+      {
+        path: "/contact",
+        element: <ContactUs />,
       },
       {
         path: "donation-details/:id",
@@ -116,30 +120,7 @@ const router = createBrowserRouter([
           </AdminRoute>
         ),
       },
-      {
-        path: "all-blood-donation-request",
-        element: (
-          <AdminRoute>
-            <AllDonationRequests />
-          </AdminRoute>
-        ),
-      },
-      {
-        path: "content-management",
-        element: (
-          <AdminRoute>
-            <ContentManagement />
-          </AdminRoute>
-        ),
-      },
-      {
-        path: "content-management/add-blog",
-        element: (
-          <AdminRoute>
-            <AddBlog />
-          </AdminRoute>
-        ),
-      },
+
       // volunteer route
       {
         path: "volunteerHome",
@@ -149,20 +130,30 @@ const router = createBrowserRouter([
           </VolunteerRoute>
         ),
       },
+
+      // shared route
       {
         path: "all-donation-request",
         element: (
-          <VolunteerRoute>
-            <AllBloodDonationRequests />
-          </VolunteerRoute>
+          <AdminOrVolunteerRoute>
+            <AllDonationRequests />
+          </AdminOrVolunteerRoute>
         ),
       },
       {
-        path: "volunteer-content-management",
+        path: "content-management",
         element: (
-          <VolunteerRoute>
-            <VolunteerContentManagement />
-          </VolunteerRoute>
+          <AdminOrVolunteerRoute>
+            <ContentManagement />
+          </AdminOrVolunteerRoute>
+        ),
+      },
+      {
+        path: "content-management/add-blog",
+        element: (
+          <AdminOrVolunteerRoute>
+            <AddBlog />
+          </AdminOrVolunteerRoute>
         ),
       },
     ],

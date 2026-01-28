@@ -1,7 +1,6 @@
 import { Link, NavLink } from "react-router-dom";
 import useAuth from "../../../hooks/useAuth";
 import logo from "../../../assets/logo.png";
-import { IoSearch } from "react-icons/io5";
 import { FaUser } from "react-icons/fa";
 import "./Navbar.css";
 
@@ -37,6 +36,26 @@ const Navbar = () => {
           }
         >
           Find Donors
+        </NavLink>
+      </li>
+      <li>
+        <NavLink
+          to={"/about"}
+          className={({ isActive }) =>
+            isActive ? "active text-sm" : "inactive text-sm hover:text-primary"
+          }
+        >
+          About Us
+        </NavLink>
+      </li>
+      <li>
+        <NavLink
+          to={"/contact"}
+          className={({ isActive }) =>
+            isActive ? "active text-sm" : "inactive text-sm hover:text-primary"
+          }
+        >
+          Contact Us
         </NavLink>
       </li>
       <li>
@@ -96,15 +115,10 @@ const Navbar = () => {
           <ul className="menu menu-horizontal px-1">{link}</ul>
         </div>
         <div className="navbar-end">
-          <Link to={"/search"}>
-            <button className="flex mr-3 justify-center items-center text-dark3 text-xl hover:text-primary">
-              <IoSearch />
-            </button>
-          </Link>
           {user ? (
             <Link to={"/dashboard/profile"}>
               <div
-                className="flex justify-center bg-base-200 p-1 rounded-full items-center gap-2 tooltip tooltip-bottom"
+                className="flex justify-center bg-secondary border border-dark3 p-1 pr-2 rounded-full items-center gap-2 tooltip tooltip-bottom"
                 data-tip="view profile"
               >
                 <div>

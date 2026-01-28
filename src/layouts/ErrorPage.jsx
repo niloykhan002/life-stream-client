@@ -8,7 +8,7 @@ const ErrorPage = () => {
           <span className="text-primary">Oo</span>ps!
         </h1>
         <h2 className="text-xl">404 Page Not Found</h2>
-        <Link to={"/"} className="btn bg-primary text-white">
+        <Link to={"/"} className="btn text-primary border-primary">
           Go Home
         </Link>
       </div>

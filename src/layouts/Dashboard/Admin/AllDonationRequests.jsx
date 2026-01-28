@@ -67,8 +67,8 @@ const AllDonationRequests = () => {
     return <p>Loading...</p>;
   }
   return (
-    <div className="bg-white rounded-lg">
-      <h2 className="text-center text-4xl font-bold mb-10 mt-12">
+    <div className="bg-white rounded-lg pb-10">
+      <h2 className="text-center text-4xl font-bold pt-10">
         Donation <span className="text-primary">Requests</span>
       </h2>
       <div className="flex justify-end mr-4">
