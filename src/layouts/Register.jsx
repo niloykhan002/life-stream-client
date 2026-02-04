@@ -15,7 +15,7 @@ const image_hosting_api = `https://api.imgbb.com/1/upload?key=${image_hosting_ke
 
 const Register = () => {
   const axiosPublic = useAxiosPublic();
-  const { createUser, updateUser } = useAuth();
+  const { createUser, updateUser, verifyUser } = useAuth();
   const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
   const [districts] = useGetDistricts();
@@ -66,7 +66,7 @@ const Register = () => {
         toast.success("Registration Successful");
         updateUser(updateInfo)
           .then(() => {
-            navigate("/");
+            verifyUser().then(navigate("verify-email"));
           })
           .catch((error) => {
             toast.error(error.code);

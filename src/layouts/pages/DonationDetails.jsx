@@ -41,8 +41,8 @@ const DonationDetails = () => {
     });
   };
   return (
-    <div className="mb-12 mt-40">
-      <h1 className="text-center font-bold text-4xl my-12">
+    <div className="py-20">
+      <h1 className="text-center font-bold text-4xl pb-12">
         Donation <span className="text-primary">Details</span>
       </h1>
       <Toaster />
@@ -94,8 +94,8 @@ const DonationDetails = () => {
                 info.donation_status === "pending"
                   ? "text-red-600"
                   : info.donation_status === "inprogress"
-                  ? "text-green-600"
-                  : ""
+                    ? "text-green-600"
+                    : ""
               }
             >
               {info.donation_status}
@@ -103,7 +103,7 @@ const DonationDetails = () => {
           </p>
           <div>
             <button
-              className="btn bg-primary text-white"
+              className="btn bg-primary border-none text-white"
               onClick={() => setIsModalOpen(true)}
             >
               Donate

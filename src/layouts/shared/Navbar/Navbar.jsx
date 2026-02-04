@@ -118,7 +118,7 @@ const Navbar = () => {
           {user ? (
             <Link to={"/dashboard/profile"}>
               <div
-                className="flex justify-center bg-secondary border border-dark3 p-1 pr-2 rounded-full items-center gap-2 tooltip tooltip-bottom"
+                className="flex justify-center bg-secondary border  p-1 pr-2 rounded-full items-center gap-2 tooltip tooltip-bottom"
                 data-tip="view profile"
               >
                 <div>

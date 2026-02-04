@@ -151,7 +151,7 @@ const Dashboard = () => {
                       </li>
                       <li>
                         <NavLink
-                          to={"/dashboard/create-donation-request"}
+                          to={"/dashboard/create-blood-donation-request"}
                           className={"uppercase font-semibold"}
                         >
                           <IoIosCreate className="text-xl" /> Create Donation

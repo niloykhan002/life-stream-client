@@ -3,6 +3,7 @@ import AuthContext from "./AuthContext";
 import {
   createUserWithEmailAndPassword,
   onAuthStateChanged,
+  sendEmailVerification,
   signInWithEmailAndPassword,
   signOut,
   updateProfile,
@@ -18,6 +19,9 @@ const AuthProvider = ({ children }) => {
 
   const createUser = (email, password) => {
     return createUserWithEmailAndPassword(auth, email, password);
+  };
+  const verifyUser = () => {
+    return sendEmailVerification(auth.currentUser);
   };
   const updateUser = (updateInfo) => {
     return updateProfile(auth.currentUser, updateInfo);
@@ -53,6 +57,7 @@ const AuthProvider = ({ children }) => {
     createUser,
     updateUser,
     signInUser,
+    verifyUser,
     user,
     logOut,
     loading,

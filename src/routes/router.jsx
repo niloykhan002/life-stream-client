@@ -10,7 +10,6 @@ import PrivateRoute from "./PrivateRoute";
 import ProfilePage from "../layouts/Dashboard/ProfilePage";
 import DonorHome from "../layouts/Dashboard/Donor/DonorHome";
 import MyDonationRequests from "../layouts/Dashboard/Donor/MyDonationRequests";
-import CreateDonationRequest from "../layouts/Dashboard/Donor/CreateDonationRequest";
 import UpdateDonations from "../layouts/Dashboard/Donor/UpdateDonations";
 import AdminHome from "../layouts/Dashboard/Admin/AdminHome";
 import AdminRoute from "./AdminRoute";
@@ -26,6 +25,7 @@ import Blog from "../layouts/Blog";
 import BlogDetails from "../layouts/BlogDetails";
 import ContactUs from "../layouts/ContactUs";
 import AdminOrVolunteerRoute from "./AdminOrVolunteerRoute";
+import CreateBloodDonationRequest from "../layouts/Dashboard/Donor/CreateBloodDonationRequest";
 
 const router = createBrowserRouter([
   {
@@ -96,8 +96,8 @@ const router = createBrowserRouter([
         element: <MyDonationRequests />,
       },
       {
-        path: "create-donation-request",
-        element: <CreateDonationRequest />,
+        path: "create-blood-donation-request",
+        element: <CreateBloodDonationRequest />,
       },
       {
         path: "donations/:id",
