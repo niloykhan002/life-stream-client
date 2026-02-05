@@ -18,36 +18,45 @@ const AuthProvider = ({ children }) => {
   const axiosPublic = useAxiosPublic();
 
   const createUser = (email, password) => {
+    setLoading(true);
     return createUserWithEmailAndPassword(auth, email, password);
   };
   const verifyUser = () => {
+    if (!auth.currentUser) return;
     return sendEmailVerification(auth.currentUser);
   };
   const updateUser = (updateInfo) => {
+    if (!auth.currentUser) return;
     return updateProfile(auth.currentUser, updateInfo);
   };
   const signInUser = (email, password) => {
+    setLoading(true);
     return signInWithEmailAndPassword(auth, email, password);
   };
 
   const logOut = () => {
+    setLoading(true);
     return signOut(auth);
   };
   useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+    const unsubscribe = onAuthStateChanged(auth, async (currentUser) => {
       setUser(currentUser);
-      if (currentUser) {
-        const userInfo = { email: currentUser.email };
-        axiosPublic.post("/jwt", userInfo).then((res) => {
+      if (currentUser?.email && currentUser.emailVerified) {
+        try {
+          const userInfo = { email: currentUser.email };
+          const res = await axiosPublic.post("/jwt", userInfo);
+
           if (res.data.token) {
             localStorage.setItem("access-token", res.data.token);
-            setLoading(false);
           }
-        });
+        } catch (error) {
+          console.error("JWT error:", error);
+          localStorage.removeItem("access-token");
+        }
       } else {
         localStorage.removeItem("access-token");
-        setLoading(false);
       }
+      setLoading(false);
     });
     return () => {
       unsubscribe();
