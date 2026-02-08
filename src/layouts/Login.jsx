@@ -9,6 +9,7 @@ import { useState } from "react";
 
 const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
+
   const { signInUser, logOut } = useAuth();
   const location = useLocation();
   const navigate = useNavigate();
@@ -23,12 +24,17 @@ const Login = () => {
     try {
       const result = await signInUser(email, password);
       const user = result.user;
+      await user.reload();
 
       if (!user.emailVerified) {
+        localStorage.setItem("pendingVerification", email);
         toast.error("Please verify your email before logging in");
+        navigate("/verify-email", { state: { email } });
         await logOut();
         return;
       }
+
+      localStorage.removeItem("pendingVerification");
 
       toast.success("Login Successful");
 
@@ -110,10 +116,10 @@ const Login = () => {
                     </a>
                   </label>
                 </div>
-                <div className="form-control mt-6">
+                <div className="form-control">
                   <button
-                    className="btn border-none bg-primary text-white
-               hover:bg-secondary hover:text-dark1"
+                    type="submit"
+                    className="btn border-none bg-primary text-white hover:bg-secondary hover:text-dark1"
                   >
                     Login
                   </button>

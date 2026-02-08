@@ -16,17 +16,13 @@ const image_hosting_api = `https://api.imgbb.com/1/upload?key=${image_hosting_ke
 
 const Register = () => {
   const axiosPublic = useAxiosPublic();
-  const { createUser, updateUser, verifyUser, logOut } = useAuth();
+  const { createUser, updateUser, verifyUser } = useAuth();
   const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
   const [districts] = useGetDistricts();
   const [selected, setSelected] = useState("Comilla");
   const [upazila] = useGetUpazila(selected);
   const [phoneNumber, setPhoneNumber] = useState("");
-  // const [showVerifyUI, setShowVerifyUI] = useState(false);
-  // const [verifyEmail, setVerifyEmail] = useState("");
-  // const [isResending, setIsResending] = useState(false);
-  // const [countdown, setCountdown] = useState(0);
 
   const validateBangladeshiMobile = (phone) => {
     const bdMobileRegex = /^880(13|14|15|16|17|18|19)\d{8}$/;
@@ -91,67 +87,20 @@ const Register = () => {
 
       await axiosPublic.post("/users", userInfo);
 
+      localStorage.setItem("pendingVerification", email);
+
       toast.success("Verification email sent. Please check your email.");
 
       navigate("/verify-email", { state: { email } });
-
-      await logOut();
     } catch (error) {
       toast.error(error.code);
     }
   };
 
-  // const handleCheckVerification = async () => {
-  //   try {
-  //     const result = await signInUser(verifyEmail, password);
-  //     await result.user.reload();
-
-  //     if (result.user.emailVerified) {
-  //       toast.success("Email verified successfully!");
-  //       navigate("/");
-  //     } else {
-  //       toast.error("Email not verified yet. Please check your inbox.");
-  //       await logOut();
-  //     }
-  //   } catch (error) {
-  //     console.error("Error checking verification:", error);
-  //     toast.error("Failed to check verification status.");
-  //     navigate("/login");
-  //   }
-  // };
-
-  // useEffect(() => {
-  //   if (countdown > 0) {
-  //     const timer = setTimeout(() => setCountdown(countdown - 1), 1000);
-  //     return () => clearTimeout(timer);
-  //   } else {
-  //     setIsResending(false);
-  //   }
-  // }, [countdown]);
-
-  // const handleResendEmail = async () => {
-  //   try {
-  //     setIsResending(true);
-  //     setCountdown(60);
-
-  //     await signInUser(verifyEmail, password);
-  //     await verifyUser();
-
-  //     toast.success("Verification email resent");
-  //     await logOut();
-  //   } catch (error) {
-  //     console.error("Error sending verification email:", error);
-  //     toast.error("Failed to send verification email. Please try again");
-  //   } finally {
-  //     setIsResending(false);
-  //   }
-  // };
-
   return (
     <div className="bg-slate-100 min-h-screen">
       <div className="flex items-center justify-center py-20 ">
         <Toaster />
-
         <div className="lg:flex flex-row-reverse gap-5 shadow-lg rounded-2xl bg-base-100">
           <div className=" md:w-[550px] flex flex-col justify-center  lg:px-8 rounded-lg bg-secondary">
             <div className="flex justify-center items-center gap-2 pt-5">
@@ -342,7 +291,10 @@ const Register = () => {
                 </div>
               </div>
               <div className="form-control mt-6">
-                <button className="btn uppercase border-none bg-primary text-white">
+                <button
+                  type="submit"
+                  className="btn uppercase border-none bg-primary text-white"
+                >
                   Create Account
                 </button>
               </div>

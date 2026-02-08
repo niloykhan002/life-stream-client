@@ -247,6 +247,8 @@ const CreateBloodDonationRequest = () => {
                         country="bd"
                         type="tel"
                         enableSearch={true}
+                        onlyCountries={["bd"]}
+                        countryCodeEditable={false}
                         name="contactNumber"
                         value={formData.contactNumber}
                         placeholder="+880 1XXX-XXXXXX"
