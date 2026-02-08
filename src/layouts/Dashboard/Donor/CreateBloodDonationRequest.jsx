@@ -2,14 +2,15 @@ import { Link } from "react-router-dom";
 import logo from "../../../assets/logo.png";
 import PhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/style.css";
-// import DatePicker from "react-datepicker";
 import { useState } from "react";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import toast, { Toaster } from "react-hot-toast";
+import useAuth from "../../../hooks/useAuth";
 
 const CreateBloodDonationRequest = () => {
   const [currentStep, setCurrentStep] = useState(1);
   const [showSuccess, setShowSuccess] = useState(false);
+  const { user } = useAuth();
 
   const [formData, setFormData] = useState({
     patientName: "",
@@ -78,6 +79,7 @@ const CreateBloodDonationRequest = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     formData.donation_status = "pending";
+    formData.userEmail = user.email;
     if (validateStep(4)) {
       axiosSecure.post("/donations", formData).then((res) => {
         console.log(res.data);
@@ -681,7 +683,7 @@ const CreateBloodDonationRequest = () => {
                         name="agreeTerms"
                         checked={formData.agreeTerms}
                         onChange={handleInputChange}
-                        className="checkbox checkbox-error mt-1"
+                        className="checkbox checkbox-md"
                         required
                       />
                       <span className="label-text text-[#2C1810]">

@@ -123,14 +123,14 @@ const Navbar = () => {
               >
                 <div>
                   <img
-                    className="w-8 h-8 rounded-full"
+                    className="w-8 h-8 rounded-full object-cover"
                     src={user.photoURL}
                     alt=""
                   />
                 </div>
                 <div>
                   <p className="text-dark2 text-sm font-heading">
-                    {user.displayName}
+                    {user.displayName.slice(0, 8)}...
                   </p>
                 </div>
               </div>

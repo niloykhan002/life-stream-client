@@ -2,8 +2,9 @@ import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import useGetDistricts from "./useGetDistricts";
 
-const useGetUpazila = (districtName = "Comilla") => {
+const useGetUpazila = (districtName) => {
   const [districts] = useGetDistricts();
+
   const { data: upazilas = [] } = useQuery({
     queryKey: ["upazilas"],
     queryFn: async () => {
@@ -13,13 +14,14 @@ const useGetUpazila = (districtName = "Comilla") => {
   });
 
   const selectedDistrict = districts.find(
-    (district) => district.name === districtName
-  );
-  const upazila = upazilas.filter(
-    (item) => item.district_id === selectedDistrict.id
+    (district) => district.name === districtName,
   );
 
-  return [upazila];
+  const filteredUpazilas = selectedDistrict
+    ? upazilas.filter((item) => item.district_id === selectedDistrict.id)
+    : [];
+
+  return [filteredUpazilas];
 };
 
 export default useGetUpazila;

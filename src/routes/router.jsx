@@ -26,6 +26,7 @@ import BlogDetails from "../layouts/BlogDetails";
 import ContactUs from "../layouts/ContactUs";
 import AdminOrVolunteerRoute from "./AdminOrVolunteerRoute";
 import CreateBloodDonationRequest from "../layouts/Dashboard/Donor/CreateBloodDonationRequest";
+import VerifyEmail from "../layouts/VerifyEmail";
 
 const router = createBrowserRouter([
   {
@@ -74,6 +75,10 @@ const router = createBrowserRouter([
   {
     path: "/register",
     element: <Register />,
+  },
+  {
+    path: "/verify-email",
+    element: <VerifyEmail />,
   },
   {
     path: "dashboard",
