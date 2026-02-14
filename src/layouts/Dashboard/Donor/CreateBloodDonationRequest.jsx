@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import logo from "../../../assets/logo.png";
 import PhoneInput from "react-phone-input-2";
+import { BsCircleFill } from "react-icons/bs";
 import "react-phone-input-2/lib/style.css";
 import { useState } from "react";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
@@ -33,6 +34,26 @@ const CreateBloodDonationRequest = () => {
 
   const totalSteps = 4;
   const bloodTypes = ["A+", "A-", "B+", "B-", "O+", "O-", "AB+", "AB-"];
+  const urgencyLevel = [
+    {
+      heading: "critical",
+      body: "Needed within 24 hours",
+      styles: "bg-red-50 border-red-300 shadow-lg",
+      circle: "text-red-500",
+    },
+    {
+      heading: "urgent",
+      body: "Needed within 2-3 days",
+      styles: "bg-yellow-50 border-yellow-300 shadow-lg",
+      circle: "text-yellow-500",
+    },
+    {
+      heading: "scheduled",
+      body: "Planned procedure",
+      styles: "bg-green-50 border-green-300 shadow-lg",
+      circle: "text-green-500",
+    },
+  ];
   const axiosSecure = useAxiosSecure();
 
   const handleInputChange = (e) => {
@@ -68,7 +89,7 @@ const CreateBloodDonationRequest = () => {
     if (validateStep(currentStep)) {
       setCurrentStep((prev) => Math.min(prev + 1, totalSteps));
     } else {
-      alert("Please fill in all required fields before proceeding.");
+      toast.error("Please fill in all required fields before proceeding.");
     }
   };
 
@@ -87,7 +108,7 @@ const CreateBloodDonationRequest = () => {
       });
       setShowSuccess(true);
     } else {
-      alert("Please accept the terms and conditions.");
+      toast.error("Please accept the terms and conditions.");
     }
   };
 
@@ -367,7 +388,7 @@ const CreateBloodDonationRequest = () => {
                         required
                       />
                       <label className="label">
-                        <span className="label-text-alt text-[#5A4438] italic">
+                        <span className="label-text-alt text-dark3 italic">
                           1 unit = approximately 450ml
                         </span>
                       </label>
@@ -389,7 +410,7 @@ const CreateBloodDonationRequest = () => {
                       />
                     </div>
                   </div>
-
+                  {/* Urgency Level */}
                   <div className="form-control mb-6">
                     <label className="label">
                       <span className="label-text font-semibold text-[#2C1810]">
@@ -397,80 +418,39 @@ const CreateBloodDonationRequest = () => {
                       </span>
                     </label>
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                      <label
-                        className={`cursor-pointer border-2 rounded-xl p-6 transition-all hover:scale-105 ${
-                          formData.urgency === "critical"
-                            ? "bg-red-50 border-red-300 shadow-lg"
-                            : "bg-slate-100  hover:border-[#C41E3A]"
-                        }`}
-                      >
-                        <input
-                          type="radio"
-                          name="urgency"
-                          value="critical"
-                          checked={formData.urgency === "critical"}
-                          onChange={handleInputChange}
-                          className="hidden"
-                          required
-                        />
-                        <div className="text-center">
-                          <div className="text-3xl mb-2">🔴</div>
-                          <div className="font-bold text-lg mb-1">Critical</div>
-                          <div className="text-sm text-[#5A4438]">
-                            Needed within 24 hours
+                      {urgencyLevel.map((urgency) => (
+                        <label
+                          key={urgency.heading}
+                          className={`cursor-pointer border-2 rounded-xl p-6 transition-all hover:scale-105 ${
+                            formData.urgency === urgency.heading
+                              ? urgency.styles
+                              : "bg-slate-100  hover:border-primary"
+                          }`}
+                        >
+                          <input
+                            type="radio"
+                            name="urgency"
+                            value={urgency.heading}
+                            checked={formData.urgency === urgency.heading}
+                            onChange={handleInputChange}
+                            className="hidden"
+                            required
+                          />
+                          <div className="text-center">
+                            <div className="flex justify-center mb-2">
+                              <BsCircleFill
+                                className={`text-3xl ${urgency.circle}`}
+                              />
+                            </div>
+                            <div className="font-bold capitalize text-lg mb-1">
+                              {urgency.heading}
+                            </div>
+                            <div className="text-sm text-dark2">
+                              {urgency.body}
+                            </div>
                           </div>
-                        </div>
-                      </label>
-
-                      <label
-                        className={`cursor-pointer border-2 rounded-xl p-6 transition-all hover:scale-105 ${
-                          formData.urgency === "urgent"
-                            ? "bg-yellow-50 border-yellow-300 shadow-lg"
-                            : "bg-slate-100  hover:border-[#C41E3A]"
-                        }`}
-                      >
-                        <input
-                          type="radio"
-                          name="urgency"
-                          value="urgent"
-                          checked={formData.urgency === "urgent"}
-                          onChange={handleInputChange}
-                          className="hidden"
-                        />
-                        <div className="text-center">
-                          <div className="text-3xl mb-2">🟡</div>
-                          <div className="font-bold text-lg mb-1">Urgent</div>
-                          <div className="text-sm text-[#5A4438]">
-                            Needed within 2-3 days
-                          </div>
-                        </div>
-                      </label>
-
-                      <label
-                        className={`cursor-pointer border-2 rounded-xl p-6 transition-all hover:scale-105 ${
-                          formData.urgency === "normal"
-                            ? "bg-green-50 border-green-300 shadow-lg"
-                            : "bg-slate-100  hover:border-[#C41E3A]"
-                        }`}
-                      >
-                        <input
-                          type="radio"
-                          name="urgency"
-                          value="normal"
-                          checked={formData.urgency === "normal"}
-                          onChange={handleInputChange}
-                          className="hidden"
-                        />
-                        <div className="text-center">
-                          <div className="text-3xl mb-2">🟢</div>
-                          <div className="font-bold text-lg mb-1">
-                            Scheduled
-                          </div>
-                          <div className="text-sm text-[#5A4438]">
-                            Planned procedure
-                          </div>
-                        </div>
-                      </label>
+                        </label>
+                      ))}
                     </div>
                   </div>
                 </div>

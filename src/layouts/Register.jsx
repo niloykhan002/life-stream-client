@@ -79,6 +79,8 @@ const Register = () => {
       photoURL: photoURL,
     };
 
+    const registerToast = toast.loading("Creating your account...");
+
     try {
       await createUser(email, password);
 
@@ -89,11 +91,15 @@ const Register = () => {
 
       localStorage.setItem("pendingVerification", email);
 
-      toast.success("Verification email sent. Please check your email.");
+      toast.success("Verification email sent. Please check your inbox!", {
+        id: registerToast,
+      });
 
       navigate("/verify-email", { state: { email } });
     } catch (error) {
-      toast.error(error.code);
+      toast.error(error.message || "Registration failed. Please try again.", {
+        id: registerToast,
+      });
     }
   };
 

@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import useAxiosPublic from "../../../hooks/useAxiosPublic";
-import { Link } from "react-router-dom";
+import DonationCard from "../../../components/DonationCard";
 
 const DonationRequests = () => {
   const axiosPublic = useAxiosPublic();
@@ -18,46 +18,10 @@ const DonationRequests = () => {
           Donation <span className="text-primary">Requests</span>
         </h2>
 
-        <div className="overflow-x-auto">
-          <table className="table">
-            {/* head */}
-            <thead>
-              <tr>
-                <th></th>
-                <th>Name</th>
-                <th>Recipient Location</th>
-                <th>Blood Group</th>
-                <th>Donation Date</th>
-                <th>Donation Time</th>
-                <th>Action</th>
-              </tr>
-            </thead>
-            <tbody>
-              {/* row 1 */}
-              {donations.map((donation, index) => (
-                <tr key={donation._id}>
-                  <th>{index + 1}</th>
-                  <td>{donation.recipient_name}</td>
-                  <td>
-                    {donation.recipient_upazila},{" "}
-                    {donation.recipient_district}{" "}
-                  </td>
-                  <td>{donation.group}</td>
-                  <td>{donation.date}</td>
-                  <td>{donation.time}</td>
-
-                  <td>
-                    <Link
-                      to={`/donation-details/${donation._id}`}
-                      className="btn btn-neutral btn-xs"
-                    >
-                      View
-                    </Link>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
+        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4 py-12">
+          {donations.map((donation, idx) => (
+            <DonationCard key={idx} donation={donation} />
+          ))}
         </div>
       </div>
     </div>
