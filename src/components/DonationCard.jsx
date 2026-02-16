@@ -4,9 +4,11 @@ import { FaRegUser } from "react-icons/fa";
 import { GoClock } from "react-icons/go";
 import { IoChevronForward } from "react-icons/io5";
 import { LuDroplets, LuHospital } from "react-icons/lu";
+import { Link } from "react-router-dom";
 
 const DonationCard = ({ donation }) => {
   const {
+    _id,
     patientName,
     patientAge,
     patientGender,
@@ -148,10 +150,13 @@ const DonationCard = ({ donation }) => {
         </span>
 
         {/* View Details button */}
-        <button className="btn btn-sm border-none bg-primary gap-1 hover:bg-secondary hover:text-primary  text-white text-xs font-semibold rounded-xl transition-all duration-300">
+        <Link
+          to={`/donation-details/${_id}`}
+          className="btn btn-sm border-none bg-primary gap-1 hover:bg-secondary hover:text-primary  text-white text-xs font-semibold rounded-xl transition-all duration-300"
+        >
           View Details
           <IoChevronForward className="w-3.5 h-3.5" />
-        </button>
+        </Link>
       </div>
     </div>
   );
