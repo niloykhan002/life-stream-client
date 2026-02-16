@@ -5,10 +5,10 @@ import Navbar from "./shared/Navbar/Navbar";
 const Root = () => {
   return (
     <div>
-      <header className="mb-[77px]">
+      <header className="mb-[68px]">
         <Navbar />
       </header>
-      <main className="min-h-[calc(100vh-324px)] bg-slate-100">
+      <main className="min-h-[calc(100vh-288px)] bg-slate-100">
         <Outlet />
       </main>
       <footer>
