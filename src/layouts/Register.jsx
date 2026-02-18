@@ -35,10 +35,9 @@ const Register = () => {
     let formData = new FormData(e.target);
     const formValues = Object.fromEntries(formData.entries());
     const image = { image: formValues.image };
-    const name = formValues.name;
+    const email = formValues.email;
     const password = formValues.password;
     const confirm_password = formValues.confirm_password;
-    const email = formValues.email;
     formValues.contactNumber = phoneNumber;
     let photoURL = "";
 
@@ -63,7 +62,8 @@ const Register = () => {
     }
 
     const userInfo = {
-      name: name,
+      firstName: formValues.firstName,
+      lastName: formValues.lastName,
       email: email,
       image: photoURL,
       blood_group: formValues.group,
@@ -75,7 +75,7 @@ const Register = () => {
     };
 
     const updateInfo = {
-      displayName: name,
+      displayName: formValues.firstName,
       photoURL: photoURL,
     };
 
@@ -134,12 +134,24 @@ const Register = () => {
             <form onSubmit={handleRegister} className="card-body">
               <div className="form-control">
                 <label className="label">
-                  <span className="label-text">Name</span>
+                  <span className="label-text">First Name</span>
                 </label>
                 <input
                   type="text"
-                  name="name"
-                  placeholder="Enter Your Name"
+                  name="firstName"
+                  placeholder="Enter Your First Name"
+                  className="input input-bordered"
+                  required
+                />
+              </div>
+              <div className="form-control">
+                <label className="label">
+                  <span className="label-text">Last Name</span>
+                </label>
+                <input
+                  type="text"
+                  name="lastName"
+                  placeholder="Enter Your Last Name"
                   className="input input-bordered"
                   required
                 />
