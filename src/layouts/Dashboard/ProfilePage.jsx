@@ -16,9 +16,8 @@ const ProfilePage = () => {
   const { user } = useAuth();
   const axiosSecure = useAxiosSecure();
   const [districts] = useGetDistricts();
-  const [selected, setSelected] = useState("Comilla");
-  const [upazila] = useGetUpazila(selected);
   const [edit, setEdit] = useState(false);
+  const [saving, setSaving] = useState(false);
   const fileInputRef = useRef(null);
   const formRef = useRef(null);
 
@@ -35,32 +34,36 @@ const ProfilePage = () => {
       return res.data;
     },
   });
-  if (isLoading) {
-    return <Loader />;
-  }
-  const handleImage = () => {
-    fileInputRef.current.click();
-  };
+
+  const [selected, setSelected] = useState(info.district || "Comilla");
+  const [upazila] = useGetUpazila(selected);
+
+  if (isLoading) return <Loader fullPage={false} />;
+
+  const handleImage = () => fileInputRef.current.click();
 
   const handleUpdate = async (e) => {
     e.preventDefault();
-    let formData = new FormData(e.target);
+    setSaving(true);
+
+    const formData = new FormData(e.target);
     const formValues = Object.fromEntries(formData.entries());
+
+    if (formValues.contactNumber) {
+      formValues.contactNumber = formValues.contactNumber.replace(/^\+/, "");
+    }
 
     if (fileInputRef.current.files[0]) {
       try {
         const res = await axiosSecure.post(
           image_hosting_api,
           { image: formValues.image },
-          {
-            headers: {
-              "Content-Type": "multipart/form-data",
-            },
-          },
+          { headers: { "Content-Type": "multipart/form-data" } },
         );
         formValues.image = res.data.data.display_url;
       } catch (error) {
         toast.error(error.message || "Image upload failed");
+        setSaving(false);
         return;
       }
     } else {
@@ -69,266 +72,270 @@ const ProfilePage = () => {
 
     try {
       const res = await axiosSecure.patch(`/users/${info._id}`, formValues);
-
       if (res.data.modifiedCount > 0) {
-        toast.success("Updated Successfully");
+        toast.success("Profile updated successfully");
         refetch();
         setEdit(false);
+      } else {
+        toast("No changes were made");
       }
-    } catch (error) {
-      toast.error("Update failed");
-      console.error(error);
+    } catch {
+      toast.error("Update failed. Please try again.");
+    } finally {
+      setSaving(false);
     }
   };
 
   const handleCancel = () => {
     formRef.current?.reset();
+    setSelected(info.district || "Comilla");
     setEdit(false);
   };
 
+  const fieldClass = (editable) =>
+    `transition-all duration-200 ${
+      !editable
+        ? "pl-1 bg-transparent border-none cursor-default text-dark1 font-medium pointer-events-none"
+        : "bg-white cursor-text input input-bordered"
+    }`;
+
+  const selectClass = (editable) =>
+    `transition-all duration-200 ${
+      !editable
+        ? "pl-1 bg-transparent border-none cursor-default text-dark1 font-medium pointer-events-none capitalize"
+        : "bg-white cursor-text select select-bordered"
+    }`;
+
   return (
-    <div className="bg-white p-10 rounded-lg">
+    <div className="bg-white p-6 md:p-10 rounded-lg">
       <Toaster />
       <div className="divider divider-start text-primary font-semibold text-xl">
         My Profile
       </div>
-      <form ref={formRef} onSubmit={handleUpdate}>
-        <div>
-          {/* User */}
-          <div className="bg-slate-100 flex justify-between p-6 rounded-lg mt-6">
-            <div className="flex gap-4 items-center">
-              <div className="w-24 h-24 rounded-full border-4 relative">
-                <img
-                  className="w-full h-full rounded-full object-cover"
-                  src={info.image}
-                  alt="Profile"
-                />
 
-                {edit && (
-                  <button
-                    type="button"
-                    onClick={handleImage}
-                    className="absolute bottom-2 right-[2px] p-1 bg-white rounded-full"
-                  >
-                    <IoIosCamera size={18} className=" text-dark2" />
-                  </button>
-                )}
-                <div className="hidden">
-                  <input ref={fileInputRef} type="file" name="image" />
-                </div>
-              </div>
-              <div>
-                <h3 className="text-lg text-dark1 font-medium">{`${info.firstName} ${info.lastName}`}</h3>
-                <p className="text-base text-dark2 capitalize">{info.role}</p>
-                <p className="text-base text-dark2 capitalize">{`${info.upazila}, ${info.district}`}</p>
-              </div>
+      <form ref={formRef} onSubmit={handleUpdate}>
+        {/* Profile header card */}
+        <div className="bg-slate-100 flex flex-col sm:flex-row justify-between items-start sm:items-center p-6 rounded-lg mt-6 gap-4">
+          <div className="flex gap-4 items-center">
+            <div className="w-24 h-24 rounded-full border-4 border-white shadow relative flex-shrink-0">
+              <img
+                className="w-full h-full rounded-full object-cover"
+                src={
+                  info.image ||
+                  `https://ui-avatars.com/api/?name=${info.firstName}+${info.lastName}&background=random`
+                }
+                alt="Profile"
+              />
+              {edit && (
+                <button
+                  type="button"
+                  onClick={handleImage}
+                  className="absolute bottom-1 right-0 p-1.5 bg-white rounded-full shadow"
+                >
+                  <IoIosCamera size={16} className="text-dark2" />
+                </button>
+              )}
+              <input
+                ref={fileInputRef}
+                type="file"
+                name="image"
+                className="hidden"
+                accept="image/*"
+              />
             </div>
 
             <div>
-              {!edit && (
-                <button
-                  onClick={() => setEdit(true)}
-                  type="button"
-                  className="btn btn-sm border-none bg-primary text-white"
-                >
-                  Edit <MdEdit />
-                </button>
-              )}
-            </div>
-          </div>
-          {/* Personal Info */}
-          <div className="bg-slate-100 p-6 rounded-lg my-6">
-            <div className="flex items-center gap-2">
-              <div className="w-1 h-7 rounded-full bg-primary" />
-              <h3 className="text-primary font-semibold text-lg">
-                Personal Information
+              <h3 className="text-lg text-dark1 font-semibold">
+                {info.firstName} {info.lastName}
               </h3>
-            </div>
-            <div className="divider"></div>
-            <div className="flex justify-between">
-              <div className="flex flex-col gap-5">
-                {/* First Name */}
-                <div className="form-control">
-                  <label className="label">
-                    <span className="label-text text-dark2">First Name</span>
-                  </label>
-                  <input
-                    type="text"
-                    name="firstName"
-                    className={` transition-all duration-200 ${
-                      !edit
-                        ? "pl-1 bg-transparent border-none cursor-default text-dark1 font-medium pointer-events-none"
-                        : "bg-white cursor-text input"
-                    }`}
-                    readOnly={!edit}
-                    defaultValue={info.firstName}
-                    required
-                  />
-                </div>
-                {/* Email */}
-                <div className="form-control">
-                  <label className="label">
-                    <span className="label-text text-dark2">Email Address</span>
-                  </label>
-                  <input
-                    type="email"
-                    name="email"
-                    className="transition-all duration-200 pl-1 bg-transparent border-none cursor-default text-dark1 font-medium pointer-events-none"
-                    readOnly={true}
-                    defaultValue={info.email}
-                    required
-                  />
-                </div>
-              </div>
-
-              <div className="flex flex-col gap-5">
-                {/* Last Name */}
-                <div className="form-control">
-                  <label className="label">
-                    <span className="label-text text-dark2">Last Name</span>
-                  </label>
-                  <input
-                    type="text"
-                    name="lastName"
-                    className={` transition-all duration-200 ${
-                      !edit
-                        ? "pl-1 bg-transparent border-none cursor-default text-dark1 font-medium pointer-events-none"
-                        : "bg-white cursor-text input"
-                    }`}
-                    readOnly={!edit}
-                    defaultValue={info.lastName}
-                    required
-                  />
-                </div>
-                {/* Phone Number */}
-                <div className="form-control">
-                  <label className="label">
-                    <span className="label-text text-dark2">Phone Number</span>
-                  </label>
-                  <input
-                    type="text"
-                    name="contactNumber"
-                    className={` transition-all duration-200 ${
-                      !edit
-                        ? "pl-1 bg-transparent border-none cursor-default text-dark1 font-medium pointer-events-none"
-                        : "bg-white cursor-text input"
-                    }`}
-                    readOnly={!edit}
-                    defaultValue={`+${info.contactNumber}`}
-                    required
-                  />
-                </div>
-              </div>
-
-              <div className="flex flex-col gap-5">
-                {/* Blood Group */}
-                <div className="form-control">
-                  <label className="label">
-                    <span className="label-text">Blood Group</span>
-                  </label>
-                  <select
-                    className={` transition-all duration-200 ${
-                      !edit
-                        ? "pl-1 bg-transparent border-none cursor-default text-dark1 font-medium pointer-events-none capitalize"
-                        : "bg-white cursor-text select select-bordered"
-                    }`}
-                    disabled={!edit}
-                    name="blood_group"
-                    defaultValue={info.blood_group}
-                  >
-                    <option>A+</option>
-                    <option>A-</option>
-                    <option>B+</option>
-                    <option>B-</option>
-                    <option>AB+</option>
-                    <option>AB-</option>
-                    <option>O+</option>
-                    <option>O-</option>
-                  </select>
-                </div>
-                {/* User Role */}
-                <div className="form-control">
-                  <label className="label">
-                    <span className="label-text text-dark2">User Role</span>
-                  </label>
-                  <input
-                    type="text"
-                    name="role"
-                    className="transition-all duration-200 pl-1 bg-transparent border-none cursor-default text-dark1 font-medium pointer-events-none capitalize"
-                    readOnly={true}
-                    defaultValue={info.role}
-                    required
-                  />
-                </div>
-              </div>
+              <p className="text-sm text-dark2 capitalize">{info.role}</p>
+              <p className="text-sm text-dark2 capitalize">
+                {info.upazila}, {info.district}
+              </p>
             </div>
           </div>
-          {/* Address */}
-          <div className="bg-slate-100 p-6 rounded-lg my-6">
-            <div className="flex items-center gap-2">
-              <div className="w-1 h-7 rounded-full bg-primary" />
-              <h3 className="text-primary font-semibold text-lg">Address</h3>
+
+          {!edit && (
+            <button
+              onClick={() => setEdit(true)}
+              type="button"
+              className="btn btn-sm border-none bg-primary text-white"
+            >
+              Edit <MdEdit />
+            </button>
+          )}
+        </div>
+
+        {/* Personal Information */}
+        <div className="bg-slate-100 p-6 rounded-lg my-6">
+          <div className="flex items-center gap-2 mb-2">
+            <div className="w-1 h-7 rounded-full bg-primary" />
+            <h3 className="text-primary font-semibold text-lg">
+              Personal Information
+            </h3>
+          </div>
+          <div className="divider mt-0" />
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+            <div className="form-control">
+              <label className="label">
+                <span className="label-text text-dark2">First Name</span>
+              </label>
+              <input
+                type="text"
+                name="firstName"
+                className={fieldClass(edit)}
+                readOnly={!edit}
+                defaultValue={info.firstName}
+                required
+              />
             </div>
-            <div className="divider"></div>
-            <div className="flex gap-8">
-              {/* District */}
-              <div className="form-control">
-                <label className="label">
-                  <span className="label-text">District</span>
-                </label>
-                <select
-                  onChange={(e) => setSelected(e.target.value)}
-                  className={` transition-all duration-200 ${
-                    !edit
-                      ? "pl-1 bg-transparent border-none cursor-default text-dark1 font-medium pointer-events-none capitalize"
-                      : "bg-white cursor-text select select-bordered"
-                  }`}
-                  disabled={!edit}
-                  name="district"
-                  defaultValue={info.district}
-                >
-                  {districts.map((district) => (
-                    <option key={district.id}>{district.name}</option>
-                  ))}
-                </select>
-              </div>
-              {/* upazila */}
-              <div className="form-control">
-                <label className="label">
-                  <span className="label-text">Upazila</span>
-                </label>
-                <select
-                  className={` transition-all duration-200 ${
-                    !edit
-                      ? "pl-1 bg-transparent border-none cursor-default text-dark1 font-medium pointer-events-none capitalize"
-                      : "bg-white cursor-text select select-bordered"
-                  }`}
-                  disabled={!edit}
-                  name="upazila"
-                  defaultValue={info.upazila}
-                >
-                  {upazila.map((item) => (
-                    <option key={item.id}>{item.name}</option>
-                  ))}
-                </select>
-              </div>
+
+            <div className="form-control">
+              <label className="label">
+                <span className="label-text text-dark2">Last Name</span>
+              </label>
+              <input
+                type="text"
+                name="lastName"
+                className={fieldClass(edit)}
+                readOnly={!edit}
+                defaultValue={info.lastName}
+                required
+              />
+            </div>
+
+            <div className="form-control">
+              <label className="label">
+                <span className="label-text text-dark2">Email Address</span>
+              </label>
+              <input
+                type="email"
+                name="email"
+                className="transition-all duration-200 pl-1 bg-transparent border-none cursor-default text-dark1 font-medium pointer-events-none"
+                readOnly
+                defaultValue={info.email}
+              />
+            </div>
+
+            <div className="form-control">
+              <label className="label">
+                <span className="label-text text-dark2">Phone Number</span>
+              </label>
+              <input
+                type="text"
+                name="contactNumber"
+                className={fieldClass(edit)}
+                readOnly={!edit}
+                defaultValue={
+                  info.contactNumber ? `+${info.contactNumber}` : ""
+                }
+                required
+              />
+            </div>
+
+            <div className="form-control">
+              <label className="label">
+                <span className="label-text">Blood Group</span>
+              </label>
+              <select
+                className={selectClass(edit)}
+                disabled={!edit}
+                name="blood_group"
+                defaultValue={info.blood_group}
+              >
+                {["A+", "A-", "B+", "B-", "AB+", "AB-", "O+", "O-"].map(
+                  (bg) => (
+                    <option key={bg}>{bg}</option>
+                  ),
+                )}
+              </select>
+            </div>
+
+            <div className="form-control">
+              <label className="label">
+                <span className="label-text text-dark2">User Role</span>
+              </label>
+              <input
+                type="text"
+                name="role"
+                className="transition-all duration-200 pl-1 bg-transparent border-none cursor-default text-dark1 font-medium pointer-events-none capitalize"
+                readOnly
+                defaultValue={info.role}
+              />
             </div>
           </div>
         </div>
-        {/* action buttons */}
+
+        {/* Address */}
+        <div className="bg-slate-100 p-6 rounded-lg my-6">
+          <div className="flex items-center gap-2 mb-2">
+            <div className="w-1 h-7 rounded-full bg-primary" />
+            <h3 className="text-primary font-semibold text-lg">Address</h3>
+          </div>
+          <div className="divider mt-0" />
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+            <div className="form-control">
+              <label className="label">
+                <span className="label-text">District</span>
+              </label>
+              <select
+                onChange={(e) => setSelected(e.target.value)}
+                className={selectClass(edit)}
+                disabled={!edit}
+                name="district"
+                defaultValue={info.district}
+              >
+                {districts.map((district) => (
+                  <option key={district.id}>{district.name}</option>
+                ))}
+              </select>
+            </div>
+
+            <div className="form-control">
+              <label className="label">
+                <span className="label-text">Upazila</span>
+              </label>
+              <select
+                className={selectClass(edit)}
+                disabled={!edit}
+                name="upazila"
+                defaultValue={info.upazila}
+              >
+                {upazila.map((item) => (
+                  <option key={item.id}>{item.name}</option>
+                ))}
+              </select>
+            </div>
+          </div>
+        </div>
+
+        {/* Action buttons */}
         {edit && (
-          <div className="flex justify-end gap-2 pt-5">
+          <div className="flex justify-end gap-2 pt-2">
             <button
+              type="button"
               onClick={handleCancel}
-              className="bg-gray-300 hover:bg-gray-400 text-dark1 px-4 py-2 rounded-md"
+              disabled={saving}
+              className="bg-gray-300 hover:bg-gray-400 text-dark1 px-4 py-2 rounded-md disabled:opacity-50"
             >
               Cancel
             </button>
+
             <button
               type="submit"
-              className="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-md"
+              disabled={saving}
+              className="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-md disabled:opacity-50 flex items-center gap-2"
             >
-              Save
+              {saving ? (
+                <>
+                  <span className="loading loading-spinner loading-xs" />
+                  Saving...
+                </>
+              ) : (
+                "Save Changes"
+              )}
             </button>
           </div>
         )}

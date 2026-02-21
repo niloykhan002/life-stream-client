@@ -24,10 +24,29 @@ const MyDonationRequests = () => {
     },
   });
 
+  const stats = [
+    { label: "Total", value: donations.length, color: "text-slate-700" },
+    {
+      label: "Pending",
+      value: donations.filter((d) => d.donation_status === "pending").length,
+      color: "text-amber-500",
+    },
+    {
+      label: "In Progress",
+      value: donations.filter((d) => d.donation_status === "inprogress").length,
+      color: "text-blue-500",
+    },
+    {
+      label: "Done",
+      value: donations.filter((d) => d.donation_status === "done").length,
+      color: "text-green-500",
+    },
+  ];
+
   if (isLoading) return <Loader fullPage={false} />;
 
   return (
-    <div className="bg-white rounded-lg min-h-screen p-6">
+    <div className="bg-white rounded-lg min-h-screen p-10">
       {/* Header */}
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-8">
         <div>
@@ -58,32 +77,13 @@ const MyDonationRequests = () => {
 
       {/* Stats strip */}
       <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-8">
-        {[
-          { label: "Total", value: donations.length, color: "text-slate-700" },
-          {
-            label: "Pending",
-            value: donations.filter((d) => d.donation_status === "pending")
-              .length,
-            color: "text-amber-500",
-          },
-          {
-            label: "In Progress",
-            value: donations.filter((d) => d.donation_status === "inprogress")
-              .length,
-            color: "text-blue-500",
-          },
-          {
-            label: "Done",
-            value: donations.filter((d) => d.donation_status === "done").length,
-            color: "text-green-500",
-          },
-        ].map(({ label, value, color }) => (
+        {stats.map((s) => (
           <div
-            key={label}
-            className="bg-slate-50 rounded-xl px-4 py-3 border border-slate-100"
+            key={s.label}
+            className="flex flex-col items-center bg-slate-100 rounded-xl px-4 py-3"
           >
-            <p className={`text-2xl font-bold ${color}`}>{value}</p>
-            <p className="text-slate-400 text-xs mt-0.5">{label}</p>
+            <p className={`text-2xl font-bold ${s.color}`}>{s.value}</p>
+            <p className="text-slate-400 text-xs mt-0.5">{s.label}</p>
           </div>
         ))}
       </div>
