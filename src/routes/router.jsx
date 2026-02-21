@@ -8,7 +8,6 @@ import Dashboard from "../layouts/Dashboard/Dashboard";
 import Search from "../layouts/pages/Search/Search";
 import PrivateRoute from "./PrivateRoute";
 import ProfilePage from "../layouts/Dashboard/ProfilePage";
-import DonorHome from "../layouts/Dashboard/Donor/DonorHome";
 import MyDonationRequests from "../layouts/Dashboard/Donor/MyDonationRequests";
 import UpdateDonations from "../layouts/Dashboard/Donor/UpdateDonations";
 import AdminHome from "../layouts/Dashboard/Admin/AdminHome";
@@ -91,10 +90,6 @@ const router = createBrowserRouter([
       {
         path: "profile",
         element: <ProfilePage />,
-      },
-      {
-        path: "donorHome",
-        element: <DonorHome />,
       },
       {
         path: "my-donation-requests",

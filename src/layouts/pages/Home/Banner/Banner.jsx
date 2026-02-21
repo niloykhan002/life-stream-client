@@ -17,7 +17,7 @@ const Banner = () => {
               fullest.
             </p>
             <div className="flex items-center gap-4">
-              <Link to={"/register"}>
+              <Link to={"/dashboard/profile"}>
                 <button className="btn bg-primary text-white border-none">
                   Join as a Donor
                 </button>

@@ -134,14 +134,6 @@ const Dashboard = () => {
 
                       <li>
                         <NavLink
-                          to={"/dashboard/donorHome"}
-                          className={"uppercase font-semibold"}
-                        >
-                          <FaHome className="text-xl" /> Donor Home
-                        </NavLink>
-                      </li>
-                      <li>
-                        <NavLink
                           to={"/dashboard/my-donation-requests"}
                           className={"uppercase font-semibold"}
                         >
