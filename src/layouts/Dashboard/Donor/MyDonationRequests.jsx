@@ -25,7 +25,7 @@ const MyDonationRequests = () => {
   });
 
   const stats = [
-    { label: "Total", value: donations.length, color: "text-slate-700" },
+    { label: "Total", value: donations.length, color: "text-dark1" },
     {
       label: "Pending",
       value: donations.filter((d) => d.donation_status === "pending").length,
@@ -83,7 +83,7 @@ const MyDonationRequests = () => {
             className="flex flex-col items-center bg-slate-100 rounded-xl px-4 py-3"
           >
             <p className={`text-2xl font-bold ${s.color}`}>{s.value}</p>
-            <p className="text-slate-400 text-xs mt-0.5">{s.label}</p>
+            <p className="text-dark3 text-xs mt-0.5">{s.label}</p>
           </div>
         ))}
       </div>

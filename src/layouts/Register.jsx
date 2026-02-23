@@ -70,8 +70,6 @@ const Register = () => {
       district: formValues.district,
       upazila: formValues.upazila,
       contactNumber: formValues.contactNumber,
-      status: "active",
-      role: "donor",
     };
 
     const updateInfo = {
