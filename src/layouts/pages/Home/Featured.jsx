@@ -3,7 +3,7 @@ import img1 from "../../../assets/featured.jpg";
 const Featured = () => {
   return (
     <div className="container mx-auto py-16">
-      <h2 className="text-center text-3xl font-heading font-bold mb-20">
+      <h2 className="text-3xl text-center md:text-4xl lg:text-5xl font-extrabold text-dark1 leading-tight mb-20">
         Our <span className="text-primary">Features</span>
       </h2>
       <div>

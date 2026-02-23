@@ -41,10 +41,10 @@ const StatsSection = () => {
   return (
     <section className="bg-slate-100 py-16">
       <div className="container mx-auto text-center">
-        <h2 className="text-3xl font-bold text-dark1 mb-2">
+        <h2 className="text-3xl md:text-4xl lg:text-5xl font-extrabold text-dark1 leading-tight mb-2">
           Our <span className="text-primary">Impact</span>
         </h2>
-        <p className="text-dark3 mb-12">
+        <p className="text-dark3 text-base mb-12">
           Numbers that represent lives changed through our community
         </p>
 
