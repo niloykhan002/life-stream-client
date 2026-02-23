@@ -80,7 +80,7 @@ const MyDonationRequests = () => {
         {stats.map((s) => (
           <div
             key={s.label}
-            className="flex flex-col items-center bg-slate-100 rounded-xl px-4 py-3"
+            className="flex flex-col items-center bg-slate-100 border rounded-xl px-4 py-3"
           >
             <p className={`text-2xl font-bold ${s.color}`}>{s.value}</p>
             <p className="text-dark3 text-xs mt-0.5">{s.label}</p>

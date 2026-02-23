@@ -39,8 +39,8 @@ const StatsSection = () => {
   ];
 
   return (
-    <section className="bg-slate-100 py-16">
-      <div className="container mx-auto text-center">
+    <section className="bg-white py-16">
+      <div className="container mx-auto px-4 text-center">
         <h2 className="text-3xl md:text-4xl lg:text-5xl font-extrabold text-dark1 leading-tight mb-2">
           Our <span className="text-primary">Impact</span>
         </h2>
@@ -52,9 +52,9 @@ const StatsSection = () => {
           {statItems.map((item) => (
             <div
               key={item.label}
-              className="bg-white rounded-2xl shadow-sm p-6 flex flex-col items-center gap-2 hover:shadow-md hover:-translate-y-1 transition-all duration-300"
+              className="bg-slate-100 rounded-2xl shadow-sm p-6 flex flex-col items-center gap-2 border hover:shadow-md hover:-translate-y-1 transition-all duration-300"
             >
-              <span className="text-3xl text-dark1">{item.icon}</span>
+              <span className="text-3xl text-dark3">{item.icon}</span>
               <span className="text-2xl font-bold text-primary">
                 {item.value.toLocaleString()}+
               </span>

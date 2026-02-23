@@ -35,7 +35,7 @@ const DonationCard = ({ donation }) => {
     hour12: true,
   });
   return (
-    <div className="relative flex flex-col justify-between bg-white rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden max-w-sm w-full">
+    <div className="relative flex flex-col justify-between bg-white rounded-xl border hover:shadow-md transition-all duration-300 overflow-hidden max-w-sm w-full">
       {/* Top accent bar */}
       <div className="h-1.5 w-full bg-primary" />
 
@@ -139,7 +139,7 @@ const DonationCard = ({ donation }) => {
           {[...Array(Number(unitsNeeded))].map((_, i) => (
             <div
               key={i}
-              className="w-6 h-6 rounded-full border-primary bg-secondary border-2 flex items-center justify-center"
+              className="w-5 h-5 rounded-full border-primary bg-secondary border-2 flex items-center justify-center"
             >
               <LuDroplets className="w-3 h-3 text-dark1" />
             </div>
@@ -152,7 +152,7 @@ const DonationCard = ({ donation }) => {
         {/* View Details button */}
         <Link
           to={`/donation-details/${_id}`}
-          className="btn btn-sm border-none bg-primary gap-1 hover:bg-secondary hover:text-primary  text-white text-xs font-semibold rounded-xl transition-all duration-300"
+          className="btn btn-sm border-none bg-primary gap-1 hover:opacity-70 hover:bg-primary  text-white text-xs font-semibold rounded-xl transition-all duration-300"
         >
           View Details
           <IoChevronForward className="w-3.5 h-3.5" />

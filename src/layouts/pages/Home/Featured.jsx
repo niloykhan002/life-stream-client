@@ -2,7 +2,7 @@ import img1 from "../../../assets/featured.jpg";
 
 const Featured = () => {
   return (
-    <div className="container mx-auto py-16">
+    <div className="container mx-auto px-4 py-20">
       <h2 className="text-3xl text-center md:text-4xl lg:text-5xl font-extrabold text-dark1 leading-tight mb-20">
         Our <span className="text-primary">Features</span>
       </h2>
@@ -13,7 +13,7 @@ const Featured = () => {
             className="md:w-[550px] h-96 object-cover rounded-lg shadow-2xl"
           />
           <div>
-            <h1 className="text-5xl font-heading font-bold">
+            <h1 className="text-3xl md:text-4xl lg:text-5xl font-heading font-bold">
               Why Choose Life Stream ?
             </h1>
             <p className="text-primary font-bold text-lg mt-6 mb-4">

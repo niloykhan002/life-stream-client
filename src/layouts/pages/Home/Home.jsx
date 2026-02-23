@@ -1,4 +1,5 @@
 import Banner from "./Banner/Banner";
+import FAQSection from "./FAQSection";
 import Featured from "./Featured";
 import StatsSection from "./StatsSection";
 import UrgentBloodRequests from "./UrgentBloodRequests";
@@ -10,6 +11,7 @@ const Home = () => {
       <StatsSection />
       <UrgentBloodRequests />
       <Featured />
+      <FAQSection />
     </div>
   );
 };

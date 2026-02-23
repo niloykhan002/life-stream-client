@@ -24,7 +24,7 @@ const UrgentBloodRequests = () => {
 
   return (
     <section className="py-20 bg-gradient-to-b from-white to-red-50 relative overflow-hidden">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative">
+      <div className="container mx-auto px-4 relative">
         {/* Section Header */}
         <div className="text-center mb-12">
           {/* Live badge */}

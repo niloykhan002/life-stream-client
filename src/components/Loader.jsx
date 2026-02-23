@@ -2,7 +2,7 @@ import PropTypes from "prop-types";
 
 const Loader = ({ fullPage = true }) => (
   <div
-    className={`flex flex-col justify-center items-center gap-5 bg-slate-100
+    className={`flex flex-col justify-center items-center gap-5
     ${fullPage ? "min-h-screen" : "min-h-[400px] w-full rounded-xl"}`}
   >
     {/* Spinner ring */}
@@ -15,10 +15,10 @@ const Loader = ({ fullPage = true }) => (
     </div>
 
     <div className="text-center">
-      <p className="text-slate-700 font-semibold text-lg tracking-wide">
+      <p className="text-dark1 font-semibold text-lg tracking-wide">
         Please wait
       </p>
-      <p className="text-slate-400 text-sm mt-1">Fetching data...</p>
+      <p className="text-dark3 text-sm mt-1">Fetching data...</p>
     </div>
 
     <div className="flex gap-1.5">
