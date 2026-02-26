@@ -26,6 +26,7 @@ import ContactUs from "../layouts/ContactUs";
 import AdminOrVolunteerRoute from "./AdminOrVolunteerRoute";
 import CreateBloodDonationRequest from "../layouts/Dashboard/Donor/CreateBloodDonationRequest";
 import VerifyEmail from "../layouts/VerifyEmail";
+import AboutUs from "../layouts/pages/AboutUs";
 
 const router = createBrowserRouter([
   {
@@ -44,6 +45,10 @@ const router = createBrowserRouter([
       {
         path: "/donation-requests",
         element: <DonationRequests />,
+      },
+      {
+        path: "/about",
+        element: <AboutUs />,
       },
       {
         path: "/contact",

@@ -9,11 +9,11 @@ const Home = () => {
   return (
     <div>
       <Banner />
+      <Featured />
       <StatsSection />
       <UrgentBloodRequests />
-      <Featured />
-      <FAQSection />
       <TestimonialsSection />
+      <FAQSection />
     </div>
   );
 };
