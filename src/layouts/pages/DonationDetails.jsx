@@ -323,7 +323,7 @@ const DonationDetails = () => {
 
                 <button
                   onClick={handleShare}
-                  className="btn rounded-full w-full font-bold gap-2 border-primary text-primary hover:bg-primary hover:text-white hover:border-none border-2 bg-white transition-colors"
+                  className="btn rounded-full w-full font-bold gap-2 border-primary text-primary hover:bg-primary hover:text-white hover:border-none border-2 bg-white transition-colors duration-300"
                 >
                   <FiShare2 size={18} />
                   Share Request

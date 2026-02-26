@@ -127,7 +127,7 @@ const FAQSection = () => {
               >
                 <button
                   onClick={() => toggle(index)}
-                  className="w-full flex items-center justify-between px-6 py-5 text-left bg-white hover:bg-red-50 transition-colors duration-200"
+                  className="w-full flex items-center justify-between px-6 py-5 text-left bg-white hover:bg-secondary transition-colors duration-200"
                 >
                   <div className="flex items-center gap-3">
                     {/* Category badge */}
@@ -188,7 +188,7 @@ const FAQSection = () => {
           </p>
           <button
             onClick={() => navigate("/contact")}
-            className="inline-flex items-center gap-2 bg-primary text-white font-semibold px-7 py-3 rounded-full shadow-lg shadow-red-200 transition-all duration-200 active:scale-95"
+            className="inline-flex items-center gap-2 bg-primary text-white font-semibold px-7 py-3 rounded-full shadow-lg shadow-red-200 hover:-translate-y-0.5   transition-all duration-200 active:scale-95"
           >
             Contact Us
             <svg

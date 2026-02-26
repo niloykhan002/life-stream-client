@@ -78,7 +78,7 @@ const UrgentBloodRequests = () => {
         <div className="text-center mt-12">
           <button
             onClick={() => navigate("/donation-requests")}
-            className="inline-flex items-center gap-2 bg-primary active:scale-95 text-white font-semibold px-8 py-3.5 rounded-full shadow-lg shadow-red-200 transition-all duration-200"
+            className="inline-flex items-center gap-2 bg-primary active:scale-95 text-white font-semibold px-8 py-3.5 rounded-full shadow-lg shadow-red-200 hover:-translate-y-0.5 transition-all duration-200"
           >
             View All Blood Requests
             <FiArrowRight size={18} />
