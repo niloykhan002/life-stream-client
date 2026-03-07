@@ -18,15 +18,12 @@ import DonationRequests from "../layouts/pages/DonationRequests/DonationRequests
 import DonationDetails from "../layouts/pages/DonationDetails";
 import ContentManagement from "../layouts/Dashboard/Admin/ContentManagement";
 import AddBlog from "../layouts/Dashboard/Admin/AddBlog";
-import VolunteerHome from "../layouts/Dashboard/Volunteer/VolunteerHome";
-import VolunteerRoute from "./VolunteerRoute";
-import Blog from "../layouts/Blog";
 import BlogDetails from "../layouts/BlogDetails";
 import ContactUs from "../layouts/ContactUs";
-import AdminOrVolunteerRoute from "./AdminOrVolunteerRoute";
 import CreateBloodDonationRequest from "../layouts/Dashboard/Donor/CreateBloodDonationRequest";
 import VerifyEmail from "../layouts/VerifyEmail";
 import AboutUs from "../layouts/pages/AboutUs";
+import BlogPage from "../layouts/pages/BlogPage";
 
 const router = createBrowserRouter([
   {
@@ -64,7 +61,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/blogs",
-        element: <Blog />,
+        element: <BlogPage />,
       },
       {
         path: "/blogs/:id",
@@ -125,40 +122,28 @@ const router = createBrowserRouter([
           </AdminRoute>
         ),
       },
-
-      // volunteer route
-      {
-        path: "volunteerHome",
-        element: (
-          <VolunteerRoute>
-            <VolunteerHome />
-          </VolunteerRoute>
-        ),
-      },
-
-      // shared route
       {
         path: "all-donation-request",
         element: (
-          <AdminOrVolunteerRoute>
+          <AdminRoute>
             <AllDonationRequests />
-          </AdminOrVolunteerRoute>
+          </AdminRoute>
         ),
       },
       {
         path: "content-management",
         element: (
-          <AdminOrVolunteerRoute>
+          <AdminRoute>
             <ContentManagement />
-          </AdminOrVolunteerRoute>
+          </AdminRoute>
         ),
       },
       {
         path: "content-management/add-blog",
         element: (
-          <AdminOrVolunteerRoute>
+          <AdminRoute>
             <AddBlog />
-          </AdminOrVolunteerRoute>
+          </AdminRoute>
         ),
       },
     ],

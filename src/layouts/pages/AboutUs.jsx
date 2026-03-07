@@ -91,7 +91,7 @@ const AboutUs = () => {
       </section>
 
       {/* Mission & Vision */}
-      <section className="py-20 bg-white relative overflow-hidden">
+      <section className="py-20 bg-slate-100 relative overflow-hidden">
         <div className="absolute right-0 top-1/2 -translate-y-1/2 w-80 h-80 bg-red-50 rounded-full blur-3xl opacity-60 pointer-events-none" />
 
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
@@ -112,7 +112,7 @@ const AboutUs = () => {
             {missions.map((item, index) => (
               <div
                 key={index}
-                className="relative bg-white border border-gray-100 rounded-3xl p-10 shadow-sm hover:shadow-lg hover:border-red-200 transition-all duration-300 group overflow-hidden"
+                className="relative bg-white border rounded-3xl p-10 shadow-sm hover:shadow-lg hover:border-red-200 transition-all duration-300 group overflow-hidden"
               >
                 {/* Background accent */}
                 <div className="absolute top-0 right-0 w-32 h-32 bg-red-50 rounded-full blur-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
@@ -135,11 +135,11 @@ const AboutUs = () => {
 
       {/* Divider */}
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="border-t border-gray-100" />
+        <div className="border-t border-white" />
       </div>
 
       {/* Core Values */}
-      <section className="py-20 bg-white relative overflow-hidden">
+      <section className="py-20 bg-slate-100 relative overflow-hidden">
         <div className="absolute left-0 top-1/2 -translate-y-1/2 w-80 h-80 bg-rose-50 rounded-full blur-3xl opacity-60 pointer-events-none" />
 
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
@@ -160,7 +160,7 @@ const AboutUs = () => {
             {values.map((value, index) => (
               <div
                 key={index}
-                className="bg-gray-50 hover:bg-white border border-transparent hover:border-red-100 rounded-3xl p-8 transition-all duration-300 hover:shadow-md group"
+                className="bg-white hover:bg-white border hover:border-red-100 rounded-3xl p-8 transition-all duration-300 hover:shadow-md group"
               >
                 <div className="w-13 h-13 w-14 h-14 bg-white group-hover:bg-red-50 rounded-2xl flex items-center justify-center text-2xl mb-5 shadow-sm transition-colors duration-300">
                   <img src={value.icon} className="w-8 h-8" />
@@ -194,7 +194,7 @@ const AboutUs = () => {
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link
-              to="/register"
+              to="/dashboard/profile"
               className="inline-flex items-center justify-center gap-2 bg-white text-primary font-semibold px-8 py-3.5 rounded-full shadow-lg hover:bg-red-50 active:scale-95 transition-all duration-200 group"
             >
               Become a Donor

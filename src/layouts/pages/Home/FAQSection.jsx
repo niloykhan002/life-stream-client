@@ -104,7 +104,7 @@ const FAQSection = () => {
               className={`px-5 py-2 rounded-full text-sm font-semibold transition-all duration-200 ${
                 activeCategory === cat
                   ? "bg-primary text-white"
-                  : "bg-gray-100 text-gray-500 hover:bg-secondary hover:text-primary"
+                  : "bg-gray-100 text-dark3 hover:bg-secondary hover:text-primary"
               }`}
             >
               {cat}

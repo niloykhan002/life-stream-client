@@ -111,7 +111,7 @@ const AllUsers = () => {
                 <td
                   className={
                     user.role === "admin"
-                      ? "text-red-600"
+                      ? "text-primary"
                       : user.role === "volunteer"
                         ? "text-yellow-600"
                         : "text-green-600"
@@ -121,7 +121,7 @@ const AllUsers = () => {
                 </td>
                 <td
                   className={
-                    user.status === "active" ? "text-green-600" : "text-red-600"
+                    user.status === "active" ? "text-green-600" : "text-primary"
                   }
                 >
                   {user.status}
@@ -159,7 +159,7 @@ const AllUsers = () => {
                         {user.status === "active" ? (
                           <button
                             onClick={() => handleBlock(user._id)}
-                            className="btn bg-red-600 text-white btn-xs w-fu"
+                            className="btn bg-primary text-white btn-xs w-fu"
                           >
                             Block
                           </button>

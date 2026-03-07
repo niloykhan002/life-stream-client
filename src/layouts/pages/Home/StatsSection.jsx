@@ -1,8 +1,9 @@
 import { useQuery } from "@tanstack/react-query";
 import useAxiosPublic from "../../../hooks/useAxiosPublic";
-import { BiSolidDonateBlood } from "react-icons/bi";
-import { FaClipboardCheck, FaHeart } from "react-icons/fa";
-import { LuNotepadText } from "react-icons/lu";
+import donor from "../../../assets/stats-icons/donor.png";
+import life from "../../../assets/stats-icons/life.png";
+import blog from "../../../assets/stats-icons/blog.png";
+import request from "../../../assets/stats-icons/request.png";
 
 const StatsSection = () => {
   const axiosPublic = useAxiosPublic();
@@ -19,22 +20,22 @@ const StatsSection = () => {
     {
       label: "Active Donors",
       value: stats?.totalDonors ?? 0,
-      icon: <BiSolidDonateBlood />,
+      icon: donor,
     },
     {
       label: "Blood Requests",
       value: stats?.totalRequests ?? 0,
-      icon: <FaClipboardCheck />,
+      icon: request,
     },
     {
       label: "Lives Saved",
       value: stats?.totalFulfilled ?? 0,
-      icon: <FaHeart />,
+      icon: life,
     },
     {
       label: "Published Blogs",
       value: stats?.totalBlogs ?? 0,
-      icon: <LuNotepadText />,
+      icon: blog,
     },
   ];
 
@@ -54,7 +55,9 @@ const StatsSection = () => {
               key={item.label}
               className="bg-slate-100 rounded-2xl shadow-sm p-6 flex flex-col items-center gap-2 border hover:shadow-md hover:-translate-y-1 transition-all duration-300"
             >
-              <span className="text-3xl text-dark3">{item.icon}</span>
+              <span className="h-8 w-8">
+                <img src={item.icon} className="w-full" />
+              </span>
               <span className="text-2xl font-bold text-primary">
                 {item.value.toLocaleString()}+
               </span>

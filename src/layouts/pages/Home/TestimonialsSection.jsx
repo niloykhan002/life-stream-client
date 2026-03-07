@@ -106,7 +106,7 @@ const TestimonialsSection = () => {
                   <p className="text-gray-400 text-xs truncate">{t.location}</p>
                 </div>
                 {/* Blood type badge */}
-                <span className="text-xs font-extrabold text-red-600 bg-red-50 border border-red-200 px-2.5 py-1 rounded-full flex-shrink-0">
+                <span className="text-xs font-extrabold text-primary bg-red-50 border border-red-200 px-2.5 py-1 rounded-full flex-shrink-0">
                   {t.bloodType}
                 </span>
               </div>

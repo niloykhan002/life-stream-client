@@ -5,12 +5,10 @@ import { MdBloodtype, MdContentCopy } from "react-icons/md";
 import { Link, NavLink, Outlet } from "react-router-dom";
 import logo from "../../assets/logo.png";
 import useAdmin from "../../hooks/useAdmin";
-import useVolunteer from "../../hooks/useVolunteer";
 import useAuth from "../../hooks/useAuth";
 
 const Dashboard = () => {
   const [isAdmin] = useAdmin();
-  const [isVolunteer] = useVolunteer();
   const { logOut } = useAuth();
 
   const handleSignOut = () => {
@@ -77,36 +75,6 @@ const Dashboard = () => {
                           className={"uppercase font-semibold"}
                         >
                           <FaUser className="text-xl" /> All Users
-                        </NavLink>
-                      </li>
-                      <li>
-                        <NavLink
-                          to={"/dashboard/all-donation-request"}
-                          className={"uppercase font-semibold"}
-                        >
-                          <MdBloodtype className="text-xl" /> All Donation
-                          Request
-                        </NavLink>
-                      </li>
-                      <li>
-                        <NavLink
-                          to={"/dashboard/content-management"}
-                          className={"uppercase font-semibold"}
-                        >
-                          <MdContentCopy className="text-xl" /> Content
-                          Management
-                        </NavLink>
-                      </li>
-                    </>
-                  ) : isVolunteer ? (
-                    <>
-                      {/* Volunteer nav */}
-                      <li>
-                        <NavLink
-                          to={"/dashboard/volunteerHome"}
-                          className={"uppercase font-semibold"}
-                        >
-                          <FaHome className="text-xl" /> Volunteer Home
                         </NavLink>
                       </li>
                       <li>
