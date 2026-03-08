@@ -35,7 +35,7 @@ const DonationCard = ({ donation }) => {
     hour12: true,
   });
   return (
-    <div className="relative flex flex-col justify-between bg-white rounded-xl border hover:shadow-md transition-all duration-300 overflow-hidden max-w-sm w-full">
+    <div className="relative flex flex-col justify-between bg-white rounded-2xl border hover:shadow-md transition-all duration-300 overflow-hidden max-w-sm w-full">
       {/* Top accent bar */}
       <div className="h-1.5 w-full bg-primary" />
 

@@ -1,4 +1,5 @@
 import PropTypes from "prop-types";
+import { useNavigate } from "react-router-dom";
 
 const categoryColors = {
   "Health Tips": "bg-green-100 text-green-600",
@@ -9,6 +10,7 @@ const categoryColors = {
 };
 
 const BlogCard = ({ blog }) => {
+  const navigate = useNavigate();
   return (
     <div className="bg-white border border-gray-100 rounded-3xl overflow-hidden hover:shadow-lg hover:border-red-100 transition-all duration-300 group flex flex-col">
       {/* Thumbnail */}
@@ -39,21 +41,25 @@ const BlogCard = ({ blog }) => {
         {/* Footer */}
         <div className="flex items-center justify-between mt-6 pt-4 border-t border-gray-100">
           <div className="flex items-center gap-2">
-            <div className="w-8 h-8 rounded-full bg-gradient-to-br from-red-400 to-rose-600 flex items-center justify-center text-white text-xs font-bold flex-shrink-0">
-              {/* {getInitials(blog.authorName)} */}
+            <div className="w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0">
+              <img
+                src={blog.authorImage}
+                className="w-full h-full rounded-full object-cover  "
+                alt=""
+              />
             </div>
             <div>
               <div className="flex items-center gap-1.5">
                 <p className="text-gray-700 text-xs font-semibold">
                   {blog.authorName}
                 </p>
-                <span
-                  className={`text-xs font-semibold px-2 py-0.5 rounded-full capitalize ${blog.authorRole || "bg-gray-100 text-dark3"}`}
-                >
+                <span className="text-xs font-semibold px-2 py-0.5 rounded-full capitalize bg-gray-100 text-dark3">
                   {blog.authorRole}
                 </span>
               </div>
-              <p className="text-gray-400 text-xs mt-0.5">{blog.date}</p>
+              <p className="text-gray-400 text-xs mt-0.5">
+                {new Date(blog.createdAt).toDateString()}
+              </p>
             </div>
           </div>
           <span className="text-gray-400 text-xs flex-shrink-0">
@@ -62,7 +68,10 @@ const BlogCard = ({ blog }) => {
         </div>
 
         {/* Read more */}
-        <button className="mt-4 w-full text-center text-primary text-sm font-semibold hover:text-red-700 flex items-center justify-center gap-1 group/btn">
+        <button
+          onClick={() => navigate(`/blogs/${blog._id}`)}
+          className="mt-4 w-full text-center text-primary text-sm font-semibold hover:text-red-700 flex items-center justify-center gap-1 group/btn"
+        >
           Read More
           <svg
             className="w-4 h-4 group-hover/btn:translate-x-1 transition-transform duration-200"

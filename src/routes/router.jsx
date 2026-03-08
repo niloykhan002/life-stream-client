@@ -18,12 +18,12 @@ import DonationRequests from "../layouts/pages/DonationRequests/DonationRequests
 import DonationDetails from "../layouts/pages/DonationDetails";
 import ContentManagement from "../layouts/Dashboard/Admin/ContentManagement";
 import AddBlog from "../layouts/Dashboard/Admin/AddBlog";
-import BlogDetails from "../layouts/BlogDetails";
 import ContactUs from "../layouts/ContactUs";
 import CreateBloodDonationRequest from "../layouts/Dashboard/Donor/CreateBloodDonationRequest";
 import VerifyEmail from "../layouts/VerifyEmail";
 import AboutUs from "../layouts/pages/AboutUs";
 import BlogPage from "../layouts/pages/BlogPage";
+import BlogDetails from "../layouts/pages/BlogDetails";
 
 const router = createBrowserRouter([
   {

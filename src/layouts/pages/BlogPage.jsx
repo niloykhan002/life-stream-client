@@ -46,9 +46,9 @@ const BlogPage = () => {
   };
 
   return (
-    <div className="bg-gradient-t-b from-white to-red-50 min-h-screen">
+    <div className="bg-gradient-to-b from-white to-red-50 min-h-screen">
       {/* Page Header */}
-      <section className="py-16 bg-gradient-to-b from-red-50 to-white relative overflow-hidden">
+      <section className="py-16 relative overflow-hidden">
         <div className="absolute top-0 right-0 w-80 h-80 bg-red-100 rounded-full blur-3xl opacity-40 translate-x-1/2 -translate-y-1/2 pointer-events-none" />
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
           <div className="inline-flex items-center gap-2 bg-red-100 text-primary text-xs font-semibold px-4 py-1.5 rounded-full mb-4 uppercase tracking-widest">
