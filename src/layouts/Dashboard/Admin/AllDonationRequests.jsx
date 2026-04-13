@@ -1,8 +1,8 @@
 import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
-import { Link } from "react-router-dom";
-import Swal from "sweetalert2";
 import { useState } from "react";
+import Loader from "../../../components/Loader";
+import DonationRequestManagement from "../../../components/DonationRequestManagement";
 
 const AllDonationRequests = () => {
   const axiosSecure = useAxiosSecure();
@@ -22,162 +22,117 @@ const AllDonationRequests = () => {
     },
   });
 
-  const handleDelete = (id) => {
-    Swal.fire({
-      title: "Are you sure?",
-      text: "You won't be able to revert this!",
-      icon: "warning",
-      showCancelButton: true,
-      confirmButtonColor: "#3085d6",
-      cancelButtonColor: "#d33",
-      confirmButtonText: "Yes, delete it!",
-    }).then((result) => {
-      if (result.isConfirmed) {
-        axiosSecure.delete(`/donations/${id}`).then((res) => {
-          console.log(res.data);
-          if (res.data.deletedCount > 0) {
-            Swal.fire({
-              title: "Deleted!",
-              text: "Your donation request has been deleted.",
-              icon: "success",
-            });
-            refetch();
-          }
-        });
-      }
-    });
-  };
+  const stats = [
+    { label: "Total", value: donations.length, color: "text-dark1" },
+    {
+      label: "Pending",
+      value: donations.filter((d) => d.donation_status === "pending").length,
+      color: "text-amber-500",
+    },
+    {
+      label: "In Progress",
+      value: donations.filter((d) => d.donation_status === "inprogress").length,
+      color: "text-blue-500",
+    },
+    {
+      label: "Done",
+      value: donations.filter((d) => d.donation_status === "done").length,
+      color: "text-green-500",
+    },
+  ];
 
-  const handleDone = (id) => {
-    const updateInfo = { donation_status: "done" };
-    axiosSecure.patch(`/donations/${id}`, updateInfo).then((res) => {
-      console.log(res.data);
-      refetch();
-    });
-  };
-  const handleCancel = (id) => {
-    const updateInfo = { donation_status: "canceled" };
-    axiosSecure.patch(`/donations/${id}`, updateInfo).then((res) => {
-      console.log(res.data);
-      refetch();
-    });
-  };
-
-  if (isLoading) {
-    return <p>Loading...</p>;
-  }
+  if (isLoading) return <Loader fullPage={false} />;
   return (
-    <div className="bg-white rounded-lg pb-10">
-      <h2 className="text-center text-4xl font-bold pt-10">
-        Donation <span className="text-primary">Requests</span>
-      </h2>
-      <div className="flex justify-end mr-4">
-        <label className="form-control w-fit my-12">
-          <div className="label">
-            <span className="label-text">Filter</span>
-          </div>
-          <select
-            onChange={(e) => setStatus(e.target.value)}
-            className="select select-bordered"
-            name="status"
-          >
-            <option defaultChecked>all</option>
-            <option>pending</option>
-            <option>inprogress</option>
-            <option>done</option>
-            <option>canceled</option>
-          </select>
-        </label>
-      </div>
-      <div className="overflow-x-auto">
-        <table className="table">
-          {/* head */}
-          <thead>
-            <tr>
-              <th></th>
-              <th>Name</th>
-              <th>Recipient Location</th>
-              <th>Donation Date</th>
-              <th>Donation Time</th>
-              <th>Blood Group</th>
-              <th>Donation Status</th>
-              <th>Donor Information</th>
-              <th className="md:text-center">Action</th>
-            </tr>
-          </thead>
-          <tbody>
-            {/* row 1 */}
-            {donations.map((donation, index) => (
-              <tr key={donation._id}>
-                <th>{index + 1}</th>
-                <td>{donation.recipient_name}</td>
-                <td>
-                  {donation.recipient_upazila},{" "}
-                  {donation.recipient_district}{" "}
-                </td>
-                <td>{donation.date}</td>
-                <td>{donation.time}</td>
-                <td>{donation.group}</td>
-                <td>
-                  {donation.donation_status === "inprogress" ? (
-                    <div className="flex items-center gap-1">
-                      <button
-                        onClick={() => handleDone(donation._id)}
-                        className="btn btn-neutral btn-xs"
-                      >
-                        Done
-                      </button>
-                      <button
-                        onClick={() => handleCancel(donation._id)}
-                        className="btn bg-primary text-white btn-xs"
-                      >
-                        Cancel
-                      </button>
-                    </div>
-                  ) : (
-                    donation.donation_status
-                  )}
-                </td>
-                <td>
-                  {donation.donation_status === "inprogress" ? (
-                    <div className="flex flex-col text-xs">
-                      <p>Name: {donation.requester_name}</p>{" "}
-                      <p>Email: {donation.requester_email}</p>
-                    </div>
-                  ) : (
-                    "None"
-                  )}
-                </td>
+    <div className="bg-white rounded-lg min-h-screen p-10">
+      {/* Header */}
+      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-8">
+        <div>
+          <h2 className="text-3xl font-bold">
+            My Donation <span className="text-primary">Requests</span>
+          </h2>
+          <p className="text-slate-400 text-sm mt-1">
+            Manage and track all your donation requests
+          </p>
+        </div>
 
-                <td className="flex md:justify-end gap-4">
-                  <div className="flex items-center  gap-1">
-                    <div className="flex items-center gap-1">
-                      <Link
-                        to={`/dashboard/donations/${donation._id}`}
-                        className="btn btn-neutral btn-xs"
-                      >
-                        Edit
-                      </Link>
-                      <button
-                        onClick={() => handleDelete(donation._id)}
-                        className="btn bg-primary text-white btn-xs"
-                      >
-                        Delete
-                      </button>
-                    </div>
-                    <Link
-                      to={`/donation-details/${donation._id}`}
-                      className="btn btn-neutral btn-xs"
-                    >
-                      View
-                    </Link>
-                  </div>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
+        {/* Filter */}
+        <div className="flex items-center gap-2">
+          <span className="text-sm text-slate-500 font-medium">Filter by:</span>
+          <select
+            value={status}
+            onChange={(e) => setStatus(e.target.value.toLowerCase())}
+            className="select select-bordered select-sm"
+          >
+            <option value="all">All</option>
+            <option value="pending">Pending</option>
+            <option value="inprogress">In Progress</option>
+            <option value="done">Done</option>
+            <option value="canceled">Canceled</option>
+          </select>
+        </div>
       </div>
+
+      {/* Stats strip */}
+      <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-8">
+        {stats.map((s) => (
+          <div
+            key={s.label}
+            className="flex flex-col items-center bg-slate-100 border rounded-xl px-4 py-3"
+          >
+            <p className={`text-2xl font-bold ${s.color}`}>{s.value}</p>
+            <p className="text-dark3 text-xs mt-0.5">{s.label}</p>
+          </div>
+        ))}
+      </div>
+
+      {/* Table or empty state */}
+      {donations.length === 0 ? (
+        <div className="flex flex-col items-center justify-center py-24 text-center">
+          <svg
+            viewBox="0 0 24 24"
+            className="w-14 h-14 mb-4 text-slate-200"
+            fill="currentColor"
+          >
+            <path d="M12 2C8.5 7 4 11.5 4 15.5a8 8 0 0016 0C20 11.5 15.5 7 12 2z" />
+          </svg>
+          <p className="text-slate-500 font-semibold text-lg">
+            No requests found
+          </p>
+          <p className="text-slate-400 text-sm mt-1">
+            {status === "all"
+              ? "You haven't made any donation requests yet."
+              : `No requests with status "${status}".`}
+          </p>
+        </div>
+      ) : (
+        <div className="overflow-x-auto rounded-xl border border-slate-100">
+          <table className="table table-pin-rows">
+            <thead className="bg-slate-50 text-slate-500 text-xs uppercase tracking-wider">
+              <tr className="text-center">
+                <th>#</th>
+                <th>Recipient Name</th>
+                <th>Donation Date</th>
+                <th>Hospital Name</th>
+                <th>Hospital Address</th>
+                <th>Blood Type</th>
+                <th>Status</th>
+                <th>Donor Info</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              {donations.map((donation, index) => (
+                <DonationRequestManagement
+                  key={donation._id}
+                  donation={donation}
+                  index={index}
+                  refetch={refetch}
+                />
+              ))}
+            </tbody>
+          </table>
+        </div>
+      )}
     </div>
   );
 };
